@@ -6,3 +6,4 @@
   4. Ein eigenes Passwort wählen (Ist nur für euren eigenen PC damit ihr nicht immer die Passphrase eingeben müsst)
   5. Sicherstellen, dass oben rechts "Ropsten Testnetzwerk" steht. Wenn dort etwas anderes muss dies ausgewählt werden.
   6. Buy und Send empfehle ich erst einmal zu meiden. Wenn getestet werden will macht dies bitte nach Anleitung da es auch im Testnetzwerk nur eine begrenzte anzahl an Coins gibt und es nicht gerne gesehen wird wenn Coins gehortet werden.
+  7. Die Passphrase ist unter normalen umständen auf keinen Fall rauszugeben. Da dies aber nur ein Test Wallet ist habe ich sie hier einfach eingefügt.
