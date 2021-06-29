@@ -1,4 +1,13 @@
 # Backend
+## Virtual Enviroment
+1. python<3> -m venv venv anlegen
+2. python interpreter auswählen 
+3. pip<3> install -r requirements.txt 
+
+Wenn ihr Bibliotheken benötigt die noch nicht im requirements stehen einfach eintragen und Schritt 3 erneut ausführen
+
+
+
 **Wallet Zugang**
   1. Empfolenes Wallet --> MetaMask (Chrome Erweiterung --> https://metamask.io/)
   2. Metamask öffnen und auf "import using Secret Recovery Phrase" klicken.
