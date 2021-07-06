@@ -92,13 +92,6 @@ def user_put(user_inst):
     if re.match("^[a-zA-ZäÄöÖüÜ ,.'-]+$", firstname) is None or re.match("^[a-zA-ZäÄöÖüÜ ,.'-]+$", lastname) is None:
         return jsonify({'error': 'Firstname and/or lastname must contain only alphanumeric characters'}), 400
 
-    try:
-        check_name_length(firstname, 256)
-        check_name_length(lastname, 256)
-
-    except ValueError:
-        return jsonify({"error": "bad name argument"}), 400
-
     user_inst.User_Vorname = firstname
     user_inst.User_Nachname = lastname
     user_inst.User_Email = email
@@ -124,13 +117,6 @@ def user_post(session):
         return jsonify({'error': 'Firstname and/or lastname must contain only alphanumeric characters'}), 400
 
     """acc = WEB3.eth.account.create()"""
-
-    try:
-        check_name_length(firstname, 256)
-        check_name_length(lastname, 256)
-
-    except ValueError:
-        return jsonify({"error": "bad name argument"}), 400
 
     try:
         if password_Token != session.query(User).filter(User.User_passwordToken):
