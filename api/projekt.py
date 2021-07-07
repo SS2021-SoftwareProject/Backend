@@ -9,7 +9,7 @@ from geopy import distance
 from sqlalchemy import func
 from sqlalchemy.orm.exc import NoResultFound
 
-from backend.database.model import Projekt
+from db.dbStructure import Projekt
 
 
 BP = Blueprint('projects', __name__, url_prefix='/api/projects')
@@ -109,7 +109,7 @@ def projekt_post(session):
                             Projekt_status = status,
                             Projekt_istBetrag = actualSum,
                             Projekt_sollBetrag = shouldSum,
-                            Projekt_Zahlungsinformation = paymentInformation
+                            Projekt_Zahlungsinformation = paymentInformation,
                             Projekt_Page = page,
                             Projekt_Kurzbeschreibung = shortDescription
                            )

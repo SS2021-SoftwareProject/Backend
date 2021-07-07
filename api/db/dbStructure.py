@@ -33,7 +33,7 @@ class Milestone(BASE):
     image = relationship("Image",back_populates="milestone")
     idProject = Column(Integer,ForeignKey("Project.idProject"))
     ## Was bedeutet diese Zeile?
-    project = relationshipt("Project",back_populates="project")
+    project = relationship("Project",back_populates="project")
     nameMilestone = Column(VARCHAR(256))
     amountMilestone = Column(Float)
     descriptionMilestone = Column(TEXT)
