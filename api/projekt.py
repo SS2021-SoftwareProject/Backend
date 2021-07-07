@@ -9,7 +9,7 @@ from geopy import distance
 from sqlalchemy import func
 from sqlalchemy.orm.exc import NoResultFound
 
-from backend.database.model import Projekt
+from db.dbStructure import Project
 
 
 BP = Blueprint('projects', __name__, url_prefix='/api/projects')
@@ -21,14 +21,14 @@ def projects_get(session):
     name_project = request.args.get('name')
     status_project = request.args.get('status')
     
-    results = session.query(Projekt)
+    results = session.query(Project)
 
     if id_project:
-        results = results.filter(Projekt.Projekt_ID == id_project)
+        results = results.filter(Project.Projekt_ID == id_project)
     if name_project:
-        results = results.filter(Projekt.Projekt_Name == name_project)
+        results = results.filter(Project.Projekt_Name == name_project)
     if name_project:
-        results = results.filter(Projekt.Projekt_Status == status_project)
+        results = results.filter(Project.Projekt_Status == status_project)
         
     json_data = []
 
@@ -58,11 +58,11 @@ def project_by_id_get(session, id):
     except ValueError:
         return jsonify({'error': 'bad argument'}), 400
 
-    results = session.query(Projekt)
+    results = session.query(Project)
 
     try:
         if id_project:
-            results = results.filter(Projekt.Projekt_ID == id_project).one()
+            results = results.filter(Project.Projekt_ID == id_project).one()
         else:
             return jsonify({'error':'missing argument'}), 400
     except NoResultFound:
@@ -104,12 +104,12 @@ def projekt_post(session):
 
     """acc = WEB3.eth.account.create()"""
 
-    projekt_inst = Projekt(Projekt_Name=name,
+    projekt_inst = Project(Projekt_Name=name,
                             Projekt_Description = description,
                             Projekt_status = status,
                             Projekt_istBetrag = actualSum,
                             Projekt_sollBetrag = shouldSum,
-                            Projekt_Zahlungsinformation = paymentInformation
+                            Projekt_Zahlungsinformation = paymentInformation,
                             Projekt_Page = page,
                             Projekt_Kurzbeschreibung = shortDescription
                            )

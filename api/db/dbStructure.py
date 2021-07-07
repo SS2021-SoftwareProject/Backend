@@ -1,4 +1,4 @@
-from sqlalchemy import Column,Integer,VARCHAR,TEXT,Float,ForeignKey,BINARY
+from sqlalchemy import Column,Integer,VARCHAR,TEXT,Float,ForeignKey,BINARY,DATETIME
 from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
 from sqlalchemy.orm import relationship
 
@@ -33,7 +33,7 @@ class Milestone(BASE):
     image = relationship("Image",back_populates="milestone")
     idProject = Column(Integer,ForeignKey("Project.idProject"))
     ## Was bedeutet diese Zeile?
-    project = relationshipt("Project",back_populates="project")
+    project = relationship("Project",back_populates="project")
     nameMilestone = Column(VARCHAR(256))
     amountMilestone = Column(Float)
     descriptionMilestone = Column(TEXT)
@@ -47,4 +47,31 @@ class Image(BASE):
 
 class User(BASE):
     __tablename__ = "User"
+    idUser = Column(Integer,primary_key=True,autoincrement=True)
+    firstNameUser = Column(VARCHAR(256))
+    lastNameUser = Column(VARCHAR(256))
+    emailUser = Column(VARCHAR(256))
+    passwordtokenUser = Column(VARCHAR(256))
+    publickeyUser = Column(VARCHAR(256))
+    privatkeyUser = Column(VARCHAR(256))
+    registryAtUser = Column(DATETIME)
+
+class Payment(BASE):
+    __tablename__ = "Payment"
+    idPayment = Column(Integer,primary_key=True,autoincrement=True)
+    idUser = Column(Integer,ForeignKey("User.idUser"))
+    ## Was bedeutet diese Zeile?
+    user = relationship("User",back_populates="user")
+    idProject = Column(Integer,ForeignKey("Projekt.idProject"))
+    ## Was bedeutet diese Zeile?
+    project = relationship("Project",back_populates="project")
+    amountPayment = Column(Float)
+    statePayment = Column(VARCHAR(256))
+    ## Datetime als Dateiformat statt date im pdm und er
+    datePayment = Column(DATETIME)
     
+class NGO(BASE):
+    __tablename__ = "NGO"
+    idNGO = Column(Integer,primary_key=True,autoincrement=True)
+    nameNGO = Column(VARCHAR(256))
+    emailNGO = Column(VARCHAR(256))
