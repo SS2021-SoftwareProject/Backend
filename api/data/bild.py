@@ -3,13 +3,13 @@ import re
 import validators
 from flask import Blueprint, request, jsonify
 from sqlalchemy import func
-from backend.db.dbStructure.py import Meilenstein
-
+from db.dbStructure import Milestone
+from .annotations import db_session_dec
 
 BP = Blueprint('bild', __name__, url_prefix='/api/bild')
 
 @BP.route('', methods=['GET'])
-@db_session_doc
+@db_session_dec
 def bild_get(session):
     args = request.args
     id_bild = args.get('bild_id')
@@ -33,7 +33,7 @@ def bild_get(session):
     return jsonify(json_data)
 
 @BP.route('/<id>', methods=['GET'])
-@db_session_doc
+@db_session_dec
 def bild_by_id_get(session, id):
  
     id_bild = id

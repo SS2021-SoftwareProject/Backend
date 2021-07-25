@@ -3,13 +3,14 @@ import re
 import validators
 from flask import Blueprint, request, jsonify
 from sqlalchemy import func
-from backend.db.dbStructure.py import NGO
+from db.dbStructure import NGO
+from .annotations import db_session_dec
 
 
 BP = Blueprint('ngo', __name__, url_prefix='/api/ngo')
 
 @BP.route('', methods=['GET'])
-@db_session_doc
+@db_session_dec
 def ngo_get(session):
     args = request.args
     id_ngo = args.get('ngo_id')
@@ -33,7 +34,7 @@ def ngo_get(session):
         return jsonify(json_data)
 
 @BP.route('/<id>', methods=['GET'])
-@db_session_doc
+@db_session_dec
 def ngo_by_id_get(session, id):
  
     id_ngo = id

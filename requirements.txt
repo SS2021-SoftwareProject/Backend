@@ -1,4 +1,6 @@
 sqlalchemy
 validators
 flask
+flask_cors
 geopy
+jwt

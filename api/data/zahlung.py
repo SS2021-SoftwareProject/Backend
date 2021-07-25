@@ -3,13 +3,14 @@ import re
 import validators
 from flask import Blueprint, request, jsonify
 from sqlalchemy import func
-from backend.db.dbStructure.py import Zahlung
+from db.dbStructure import Payment
+from .annotations import db_session_dec
 
 
 BP = Blueprint('zahlung', __name__, url_prefix='/api/zahlung')
 
 @BP.route('', methods=['GET'])
-@db_session_doc
+@db_session_dec
 def zahlung_get(session):
     args = request.args
     id_zahlung = args.get('zahlung_id')
@@ -35,7 +36,7 @@ def zahlung_get(session):
         return jsonify(json_data)
 
 @BP.route('/<id>', methods=['GET'])
-@db_session_doc
+@db_session_dec
 def zahlung_by_id_get(session, id):
  
     id_zahlung = id

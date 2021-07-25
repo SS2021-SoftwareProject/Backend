@@ -8,7 +8,7 @@ from flask import Blueprint, request, jsonify
 from geopy import distance
 from sqlalchemy import func
 from sqlalchemy.orm.exc import NoResultFound
-
+from .annotations import db_session_dec
 from db.dbStructure import Project
 
 
@@ -46,8 +46,9 @@ def projects_get(session):
         })
     return jsonify(json_data)    
 
+
 @BP.route('/<id>', methods=['GET'])
-@db_session_doc
+@db_session_dec
 def project_by_id_get(session, id):
  
     id_project = id

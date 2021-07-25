@@ -3,13 +3,13 @@ import re
 import validators
 from flask import Blueprint, request, jsonify
 from sqlalchemy import func
-from backend.db.dbStructure.py import Meilenstein
-
+from db.dbStructure import Milestone
+from .annotations import db_session_dec
 
 BP = Blueprint('meilenstein', __name__, url_prefix='/api/meilenstein')
 
 @BP.route('', methods=['GET'])
-@db_session_doc
+@db_session_dec
 def meilenstein_get(session):
     args = request.args
     id_meilenstein = args.get('meilenstein_id')
@@ -33,7 +33,7 @@ def meilenstein_get(session):
         return jsonify(json_data)
 
 @BP.route('/<id>', methods=['GET'])
-@db_session_doc
+@db_session_dec
 def meilenstein_by_id_get(session, id):
  
     id_meilenstein = id

@@ -3,13 +3,14 @@ import re
 import validators
 from flask import Blueprint, request, jsonify
 from sqlalchemy import func
-from backend.db.dbStructure.py import user
+from db.dbStructure import User
+from .annotations import db_session_dec,auth_user
 
 
 BP = Blueprint('user', __name__, url_prefix='/api/users')
 
 @BP.route('', methods=['GET'])
-@db_session_doc
+@db_session_dec
 def users_get(session):
     args = request.args
     id_user = args.get('user_id')
@@ -38,7 +39,7 @@ def users_get(session):
     return jsonify(json_data)
 
 @BP.route('/<id>', methods=['GET'])
-@db_session_doc
+@db_session_dec
 def user_by_id_get(session, id):
  
     id_user = id
@@ -120,13 +121,13 @@ def user_post(session):
 
     try:
         if password_Token != session.query(User).filter(User.User_passwordToken):
-            return jsonify(['error': 'Invalid token.'}), 400
+            return jsonify({'error': 'Invalid token.'}), 400
         
         user_inst = User(User_Vorname=firstname,
                          User_Nachname=lastname,
                          User_Email=email)
-                         """User_Publickey=acc.address,"""
-                         """User_Privatkey=acc.key)"""
+                         #User_Publickey=acc.address,
+                         #User_Privatkey=acc.key)
     except (KeyError, ValueError, DecodeError):  # jwt decode errors
         return jsonify({'status': 'Invalid JWT'}), 400
 

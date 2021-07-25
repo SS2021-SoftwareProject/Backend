@@ -1,15 +1,51 @@
-from . import projekt
-from . import bild
-from . import meilenstein
-from . import user
-from . import zahlung
-from . import ngo
+import os
+from flask import Flask
+from flask_cors import CORS
+from db import database as db
+from data import BLUEPRINTS
 
-BLUEPRINTS = [
-    projekt.BP,
-    bild.BP,
-    meilenstein.BP,
-    user.BP,
-    zahlung.BP,
-    ngo.BP,
-]
+def create_app(test=None):
+    app = Flask(__name__,instance_relative_config=True)
+    app.config.from_mapping(
+        ROOT_DIR=os.path.join(app.root_path, '../'),
+        TEST_UPLOAD_FOLDER=os.path.join(app.root_path, "../tests/test_files"),
+        SECRET_KEY=os.urandom(24),
+        DATABASE=os.path.join(app.instance_path, 'backend.sqlite'),
+        UPLOAD_FOLDER=os.path.join(app.root_path, '../files'),
+        MAX_CONTETN_LENGTH=5 * 1024 * 1024,
+        ALLOWED_EXTENSIONS={'png', 'jpeg', 'jpg', 'gif', 'bmp'}
+    )
+    CORS(app)
+
+    if test is None:
+        app.config.from_pyfile('config.py', silent=True)
+    else:
+        app.config.from_mapping(test)
+
+    try:
+        os.makedirs(app.instance_path)
+    except OSError:
+        pass
+
+    db.init_app(app)
+    """
+     cfg_parser: configparser.ConfigParser = configparser.ConfigParser()
+    cfg_parser.read("backend_config.ini")
+    if "Sentry" in cfg_parser.sections():
+        sentry_sdk.init(
+            cfg_parser["Sentry"]["URI"],
+            integrations=[FlaskIntegration(), SqlalchemyIntegration()]
+        )
+
+    Path(app.config['UPLOAD_FOLDER']).mkdir(parents=True, exist_ok=True)
+    """
+    
+    for blueprint in BLUEPRINTS:
+        app.register_blueprint(blueprint)
+
+    return app
+
+
+if __name__=="__main__":
+    app = create_app()
+    app.run(debug=False)
