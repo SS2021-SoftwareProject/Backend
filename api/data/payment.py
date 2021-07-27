@@ -7,31 +7,22 @@ from db.dbStructure import Payment
 from .annotations import db_session_dec
 
 
-BP = Blueprint('zahlung', __name__, url_prefix='/api/zahlung')
+BP = Blueprint('payment', __name__, url_prefix='/api/payment')
 
 @BP.route('', methods=['GET'])
 @db_session_dec
 def zahlung_get(session):
-    args = request.args
-    id_zahlung = args.get('zahlung_id')
-
     results = session.query(Zahlung)
-
-    if id_zahlung:
-        results = results.filter(Zahlung.zahlung_id.contains(id_zahlung))
-    else:
-        return jsonify({'error':'missing argument'}), 400
 
     json_data = []
 
     for result in results:
         """balance = WEB3.eth.getBalance(result.User_Publickey)"""
         json_data.append({
-            'id':result.Zahlung_ID,
-            'amount':result.Zahlung_Betrag,
-            'status':result.Zahlung_Status,
-            'date':result.Zahlung_Datum,
-            'time':result.Zahlung_Uhrzeit
+            'id':result.idPayment,
+            'amount':result.amountPayment,
+            'status':result.statePayment,
+            'datetime':result.datePayment,
         })
         return jsonify(json_data)
 

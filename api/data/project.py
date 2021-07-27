@@ -17,32 +17,23 @@ BP = Blueprint('projects', __name__, url_prefix='/api/projects')
 @BP.route('', methods=['GET'])
 @db_session_dec
 def projects_get(session):
-    id_project = request.args.get('id')
-    name_project = request.args.get('name')
-    status_project = request.args.get('status')
-    
     results = session.query(Project)
 
-    if id_project:
-        results = results.filter(Project.Projekt_ID == id_project)
-    if name_project:
-        results = results.filter(Project.Projekt_Name == name_project)
-    if name_project:
-        results = results.filter(Project.Projekt_Status == status_project)
-        
     json_data = []
 
     for result in results:
         json_data.append({
-            'id':result.Projekt_ID,
-            'name':result.Projekt_Name,
-            'description':result.Projekt_Beschreibung,
-            'status':result.Projekt_Status,
-            'actualSum':result.Projekt_IstBetrag,
-            'shouldSum':result.Projekt_SollBetrag,
-            'paymentInformation':result.Projekt_Zahlungsinformation,
-            'page':result.Projekt_Page,
-            'shortDescription':result.Projekt_Kurzbeschreibung
+            'id':result.idProject,
+            'idNGO':result.idNGO,
+            'idImage':result.idImage,
+            'name':result.nameProject,
+            'description':result.descriptionProject,
+            'status':result.statusProject,
+            'actualSum':result.amountProject,
+            'shouldSum':result.shouldAmountProject,
+            'paymentInformation':result.paymentInformationProject,
+            'page':result.pageProject,
+            'shortDescription':result.shortdescriptionProject
         })
     return jsonify(json_data)    
 

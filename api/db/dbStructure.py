@@ -8,11 +8,7 @@ class Project(BASE):
     __tablename__= "Project"
     idProject = Column(Integer,primary_key=True,autoincrement=True)
     idNGO = Column(Integer,ForeignKey("NGO.idNGO"))
-    ## Was bedeutet diese Zeile?
-    nGO = relationship("NGO",back_populates="project")
     idImage = Column(Integer,ForeignKey("Image.idImage"))
-    ## Was bedeutet diese Zeile?
-    image = relationship("Image",back_populates="project")
     nameProject = Column(VARCHAR(256))
     descriptionProject = Column(TEXT)
     statusProject = Column(Integer)
@@ -22,18 +18,16 @@ class Project(BASE):
     pageProject = Column(VARCHAR(256))
     shortdescriptionProject = Column(TEXT)
 
-    ## Was bedeutet diese Zeile?
-    milestone = relationship("Meilenstein",back_populates="project")
+    milestone = relationship("Milestone",back_populates="project")
 
 class Milestone(BASE):
     __tablename__ = "Milestone"
     idMilestone = Column(Integer,primary_key=True,autoincrement=True)
     idImage = Column(Integer,ForeignKey("Image.idImage"))
-    ## Was bedeutet diese Zeile?
-    image = relationship("Image",back_populates="milestone")
+    
     idProject = Column(Integer,ForeignKey("Project.idProject"))
-    ## Was bedeutet diese Zeile?
-    project = relationship("Project",back_populates="project")
+
+    project = relationship("Project",back_populates="milestone")
     nameMilestone = Column(VARCHAR(256))
     amountMilestone = Column(Float)
     descriptionMilestone = Column(TEXT)
@@ -60,11 +54,7 @@ class Payment(BASE):
     __tablename__ = "Payment"
     idPayment = Column(Integer,primary_key=True,autoincrement=True)
     idUser = Column(Integer,ForeignKey("User.idUser"))
-    ## Was bedeutet diese Zeile?
-    user = relationship("User",back_populates="user")
-    idProject = Column(Integer,ForeignKey("Projekt.idProject"))
-    ## Was bedeutet diese Zeile?
-    project = relationship("Project",back_populates="project")
+    idProject = Column(Integer,ForeignKey("Project.idProject"))
     amountPayment = Column(Float)
     statePayment = Column(VARCHAR(256))
     ## Datetime als Dateiformat statt date im pdm und er

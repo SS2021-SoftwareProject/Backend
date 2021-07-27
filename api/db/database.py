@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from .dbStructure import BASE
 
-DB_URI = "sqlite://"
+DB_URI = "mariadb+mariadbconnector://root:raspberry@127.0.0.1:3306/backend"
 ENGINE = create_engine(DB_URI)
 
 DB_SESSION: scoped_session = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=ENGINE))
@@ -47,3 +47,6 @@ def init_app(app):
     """
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
+
+if __name__=="__main__":
+    init_db()

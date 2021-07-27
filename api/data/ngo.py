@@ -12,26 +12,19 @@ BP = Blueprint('ngo', __name__, url_prefix='/api/ngo')
 @BP.route('', methods=['GET'])
 @db_session_dec
 def ngo_get(session):
-    args = request.args
-    id_ngo = args.get('ngo_id')
-
+   
     results = session.query(NGO)
-
-    if id_ngo:
-        results = results.filter(NGO.ngo_id.contains(id_ngo))
-    else:
-        return jsonify({'error':'missing argument'}), 400
 
     json_data = []
 
     for result in results:
         """balance = WEB3.eth.getBalance(result.User_Publickey)"""
         json_data.append({
-            'id':result.NGO_ID,
-            'amount':result.NGO_Name,
-            'status':result.NGO_Email
+            'id':result.idNGO,
+            'name':result.nameNGO,
+            'email':result.emailNGO
         })
-        return jsonify(json_data)
+    return jsonify(json_data)
 
 @BP.route('/<id>', methods=['GET'])
 @db_session_dec

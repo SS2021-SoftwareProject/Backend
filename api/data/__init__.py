@@ -1,16 +1,16 @@
-from . import projekt
-from . import bild
-from . import meilenstein
+from . import project
+from . import image
+from . import milestone
 from . import user
-from . import zahlung
+from . import payment
 from . import ngo
 from . import annotations
 
 BLUEPRINTS = [
-    projekt.BP,
-    bild.BP,
-    meilenstein.BP,
+    project.BP,
+    image.BP,
+    milestone.BP,
     user.BP,
-    zahlung.BP,
+    payment.BP,
     ngo.BP,
 ]

@@ -12,29 +12,19 @@ BP = Blueprint('user', __name__, url_prefix='/api/users')
 @BP.route('', methods=['GET'])
 @db_session_dec
 def users_get(session):
-    args = request.args
-    id_user = args.get('user_id')
-
     results = session.query(User)
-
-    if id_user:
-        results = results.filter(User.user_id.contains(id_user))
-    else:
-        return jsonify({'error':'missing argument'}), 400
-
     json_data = []
-
     for result in results:
         """balance = WEB3.eth.getBalance(result.User_Publickey)"""
         json_data.append({
-            'id':result.User_ID,
-            'firstname':result.User_Vorname,
-            'lastname':result.User_Nachname,
-            'email':result.User_Email,
-            'PasswordToken':result.User_PasswordToken,
-            'Publickey':result.User_Publickey,
-            'Privatekey':result.User_Privatkey,
-            'RegisterDate':result.User_RegistriertAm
+            'id':result.idUser,
+            'firstname':result.firstNameUser,
+            'lastname':result.lastNameUser,
+            'email':result.emailUser,
+            'PasswordToken':result.passwordtokenUser,
+            'Publickey':result.publickeyUser,
+            'Privatekey':result.privatkeyUser,
+            'RegisterDate':result.registryAtUser
         })
     return jsonify(json_data)
 

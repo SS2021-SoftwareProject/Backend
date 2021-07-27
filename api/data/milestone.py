@@ -6,31 +6,24 @@ from sqlalchemy import func
 from db.dbStructure import Milestone
 from .annotations import db_session_dec
 
-BP = Blueprint('meilenstein', __name__, url_prefix='/api/meilenstein')
+BP = Blueprint('milestone', __name__, url_prefix='/api/milestone')
 
 @BP.route('', methods=['GET'])
 @db_session_dec
 def meilenstein_get(session):
-    args = request.args
-    id_meilenstein = args.get('meilenstein_id')
-
-    results = session.query(Meilenstein)
-
-    if id_meilenstein:
-        results = results.filter(Meilenstein.meilenstein_id.contains(id_meilenstein))
-    else:
-        return jsonify({'error':'missing argument'}), 400
-
+    results = session.query(Milestone)
     json_data = []
 
     for result in results:
         json_data.append({
-            'id':result.Meilenstein_ID,
-            'name':result.Meilenstein_Name,
-            'amount':result.Meilenstein_Betrag,
-            'description':result.Meilenstein_Beschreibung
+            'id':result.idMilestone,
+            'name':result.nameMilestone,
+            'amount':result.amountMilestone,
+            'description':result.descriptionMilestone,
+            'idImage':result.idImage,
+            'idProject':result.idProject
         })
-        return jsonify(json_data)
+    return jsonify(json_data)
 
 @BP.route('/<id>', methods=['GET'])
 @db_session_dec
@@ -62,27 +55,6 @@ def meilenstein_by_id_get(session, id):
     }
         
     return jsonify(json_data), 200
-
-@BP.route('', methods=['PUT'])
-def meilenstein_put(meilenstein_inst):
-    name = request.headers.get('name', default=None)
-    amount = request.headers.get('amount', default=None)
-    description = request.headers.get('description', default=None)
-    
-    if None in [name, amount, description]:
-        return jsonify({'error': 'Missing parameter'}), 400
-
-    if "" in [name, amount, description]:
-        return jsonify({'error': 'Empty parameter'}), 400
-        
-    if re.match("^[a-zA-ZäÄöÖüÜ ,.'-]+$", name) is None:
-        return jsonify({'error': 'name must contain only alphanumeric characters'}), 400
-
-    meilenstein_inst.Meilenstein_Name = name
-    meilenstein_inst.Meilenstein_Betrag = amount
-    meilenstein_inst.Meilenstein_Beschreibung = description
-    
-    return jsonify({'status': 'changed'}), 200
 
 
 @BP.route('', methods=['POST'])

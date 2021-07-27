@@ -6,7 +6,8 @@
 
 Wenn ihr Bibliotheken benötigt die noch nicht im requirements stehen einfach eintragen und Schritt 3 erneut ausführen
 
-
+### 
+grant all privileges on *.* to root@localhost identified by 'password' with grant option;
 
 **Wallet Zugang**
   1. Empfolenes Wallet --> MetaMask (Chrome Erweiterung --> https://metamask.io/)

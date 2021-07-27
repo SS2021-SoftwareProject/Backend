@@ -3,32 +3,22 @@ import re
 import validators
 from flask import Blueprint, request, jsonify
 from sqlalchemy import func
-from db.dbStructure import Milestone
+from db.dbStructure import Image
 from .annotations import db_session_dec
 
-BP = Blueprint('bild', __name__, url_prefix='/api/bild')
+BP = Blueprint('image', __name__, url_prefix='/api/image')
 
 @BP.route('', methods=['GET'])
 @db_session_dec
-def bild_get(session):
-    args = request.args
-    id_bild = args.get('bild_id')
-
-    results = session.query(Bild)
-
-    if id_bild:
-        results = results.filter(Bild.bild_id.contains(id_bild))
-    else:
-        return jsonify({'error':'missing argument'}), 400
-
+def Image_get(session):
+    results = session.query(Image)
     json_data = []
-
     for result in results:
         json_data.append({
-            'id':result.Bild_ID,
-            'picture':result.Bild_Bild,
-            'description':result.Bild_Beschreibung,
-            'format':result.Bild_Format
+            'id':result.idImage,
+            'picture':result.fileImage,
+            'description':result.descriptionImage,
+            'format':result.formatImage
         })
     return jsonify(json_data)
 
@@ -62,25 +52,6 @@ def bild_by_id_get(session, id):
     }
         
     return jsonify(json_data), 200
-
-@BP.route('', methods=['PUT'])
-def bild_put(bild_inst):
-    picture = request.headers.get('picture', default=None)
-    description = request.headers.get('description', default=None)
-    format = request.headers.get('format', default=None)
-    
-    if None in [picture, description, format]:
-        return jsonify({'error': 'Missing parameter'}), 400
-
-    if "" in [picture, description, format]:
-        return jsonify({'error': 'Empty parameter'}), 400
-
-    bild_inst.Bild_Bild = picture
-    bild_inst.Bild_Beschreibung = description
-    bild_inst.Bild_Format = format
-    
-    return jsonify({'status': 'changed'}), 200
-
 
 @BP.route('', methods=['POST'])
 @db_session_dec
