@@ -3,7 +3,7 @@ import re
 import validators
 from flask import Blueprint, request, jsonify
 from sqlalchemy import func
-from db.dbStructure import NGO
+from api.db.dbStructure import NGO
 from .annotations import db_session_dec
 
 

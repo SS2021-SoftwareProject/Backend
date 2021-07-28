@@ -1,8 +1,8 @@
 import os
 from flask import Flask
 from flask_cors import CORS
-from db import database as db
-from data import BLUEPRINTS
+from .db import database as db
+from .data import BLUEPRINTS
 
 def create_app(test=None):
     app = Flask(__name__,instance_relative_config=True)
@@ -28,17 +28,7 @@ def create_app(test=None):
         pass
 
     db.init_app(app)
-    """
-     cfg_parser: configparser.ConfigParser = configparser.ConfigParser()
-    cfg_parser.read("backend_config.ini")
-    if "Sentry" in cfg_parser.sections():
-        sentry_sdk.init(
-            cfg_parser["Sentry"]["URI"],
-            integrations=[FlaskIntegration(), SqlalchemyIntegration()]
-        )
 
-    Path(app.config['UPLOAD_FOLDER']).mkdir(parents=True, exist_ok=True)
-    """
     
     for blueprint in BLUEPRINTS:
         app.register_blueprint(blueprint)

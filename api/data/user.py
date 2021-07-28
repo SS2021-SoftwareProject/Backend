@@ -3,9 +3,9 @@ import re
 import validators
 from flask import Blueprint, request, jsonify
 from sqlalchemy import func
-from db.dbStructure import User
+from api.db.dbStructure import User
 from .annotations import db_session_dec,auth_user
-
+from api.contracts.web3 import WEB3
 
 BP = Blueprint('user', __name__, url_prefix='/api/users')
 
@@ -15,7 +15,7 @@ def users_get(session):
     results = session.query(User)
     json_data = []
     for result in results:
-        """balance = WEB3.eth.getBalance(result.User_Publickey)"""
+        balance = WEB3.eth.getBalance(result.publickeyUser)
         json_data.append({
             'id':result.idUser,
             'firstname':result.firstNameUser,
@@ -24,16 +24,15 @@ def users_get(session):
             'PasswordToken':result.passwordtokenUser,
             'Publickey':result.publickeyUser,
             'Privatekey':result.privatkeyUser,
-            'RegisterDate':result.registryAtUser
+            'RegisterDate':result.registryAtUser,
+            'balance':balance
         })
     return jsonify(json_data)
 
 @BP.route('/<id>', methods=['GET'])
 @db_session_dec
 def user_by_id_get(session, id):
- 
     id_user = id
-
     try:
         if id_user:
             int(id_user)
@@ -63,31 +62,6 @@ def user_by_id_get(session, id):
     }
         
     return jsonify(json_data), 200
-
-@BP.route('', methods=['PUT'])
-@auth_user
-def user_put(user_inst):
-    firstname = request.headers.get('firstname', default=None)
-    lastname = request.headers.get('lastname', default=None)
-    email = request.headers.get('email', default=None)
-
-    if email is not None and not validators.email(email):
-        return jsonify({'error': 'email is not valid'}), 400
-
-    if None in [firstname, lastname, email]:
-        return jsonify({'error': 'Missing parameter'}), 400
-
-    if "" in [firstname, lastname, email]:
-        return jsonify({'error': 'Empty parameter'}), 400
-
-    if re.match("^[a-zA-ZäÄöÖüÜ ,.'-]+$", firstname) is None or re.match("^[a-zA-ZäÄöÖüÜ ,.'-]+$", lastname) is None:
-        return jsonify({'error': 'Firstname and/or lastname must contain only alphanumeric characters'}), 400
-
-    user_inst.User_Vorname = firstname
-    user_inst.User_Nachname = lastname
-    user_inst.User_Email = email
-
-    return jsonify({'status': 'changed'}), 200
 
 
 @BP.route('', methods=['POST'])

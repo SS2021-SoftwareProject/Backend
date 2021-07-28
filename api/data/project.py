@@ -9,7 +9,7 @@ from geopy import distance
 from sqlalchemy import func
 from sqlalchemy.orm.exc import NoResultFound
 from .annotations import db_session_dec
-from db.dbStructure import Project
+from api.db.dbStructure import Project
 
 
 BP = Blueprint('projects', __name__, url_prefix='/api/projects')
@@ -29,8 +29,8 @@ def projects_get(session):
             'name':result.nameProject,
             'description':result.descriptionProject,
             'status':result.statusProject,
-            'actualSum':result.amountProject,
-            'shouldSum':result.shouldAmountProject,
+            'amount':result.amountProject,
+            'shouldAmount':result.shouldAmountProject,
             'paymentInformation':result.paymentInformationProject,
             'page':result.pageProject,
             'shortDescription':result.shortdescriptionProject

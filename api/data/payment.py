@@ -3,23 +3,22 @@ import re
 import validators
 from flask import Blueprint, request, jsonify
 from sqlalchemy import func
-from db.dbStructure import Payment
+from api.db.dbStructure import Payment
 from .annotations import db_session_dec
-
 
 BP = Blueprint('payment', __name__, url_prefix='/api/payment')
 
 @BP.route('', methods=['GET'])
 @db_session_dec
-def zahlung_get(session):
-    results = session.query(Zahlung)
+def payment_get(session):
+    results = session.query(Payment)
 
     json_data = []
 
     for result in results:
-        """balance = WEB3.eth.getBalance(result.User_Publickey)"""
         json_data.append({
             'id':result.idPayment,
+            'idUser':result.idUser,
             'amount':result.amountPayment,
             'status':result.statePayment,
             'datetime':result.datePayment,

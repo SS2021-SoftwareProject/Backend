@@ -49,6 +49,7 @@ class User(BASE):
     publickeyUser = Column(VARCHAR(256))
     privatkeyUser = Column(VARCHAR(256))
     registryAtUser = Column(DATETIME)
+    balanceUser = Column(Float)
 
 class Payment(BASE):
     __tablename__ = "Payment"

@@ -3,7 +3,7 @@ import re
 import validators
 from flask import Blueprint, request, jsonify
 from sqlalchemy import func
-from db.dbStructure import Milestone
+from api.db.dbStructure import Milestone
 from .annotations import db_session_dec
 
 BP = Blueprint('milestone', __name__, url_prefix='/api/milestone')

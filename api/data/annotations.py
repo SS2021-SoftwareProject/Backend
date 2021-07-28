@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy.orm.exc import NoResultFound
 
 #from blockstack_auth import BlockstackAuth
-from db.database import DB_SESSION
+from api.db.database import DB_SESSION
 
 def db_session_dec(func):
     """
