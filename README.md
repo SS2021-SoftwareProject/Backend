@@ -1,13 +1,21 @@
 # Backend
 ## Virtual Enviroment
-1. python<3> -m venv venv anlegen
-2. python interpreter auswählen 
-3. pip<3> install -r requirements.txt 
+install.sh ausführen
 
-Wenn ihr Bibliotheken benötigt die noch nicht im requirements stehen einfach eintragen und Schritt 3 erneut ausführen
 
-### 
-grant all privileges on *.* to root@localhost identified by 'password' with grant option;
+sudo mysql -u root -p
+create database backend;
+use backend;
+CREATE USER 'rootApi'@'localhost' IDENTIFIED BY 'thiel';
+GRANT ALL PRIVILEGES ON backend.* TO 'rootApi'@'localhost';
+FLUSH PRIVILEGES;
+quit;
+
+Wenn ihr Bibliotheken benötigt die noch nicht im requirements stehen einfach eintragen und 
+source venv/bin/activate
+pip install -r requirements.txt
+ ausführen
+
 
 **Wallet Zugang**
   1. Empfolenes Wallet --> MetaMask (Chrome Erweiterung --> https://metamask.io/)
