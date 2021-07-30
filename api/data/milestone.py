@@ -37,21 +37,21 @@ def meilenstein_by_id_get(session, id):
     except ValueError:
         return jsonify({'error': 'bad argument'}), 400
 
-    results = session.query(Meilenstein)
+    results = session.query(Milestone)
 
     try:
         if id_meilenstein:
-            results = results.filter(Meilenstein.meilenstein_id == id_meilenstein).one()
+            results = results.filter(Milestone.idMilestone == id_meilenstein).one()
         else:
             return jsonify({'error':'missing argument'}), 400
     except NoResultFound:
         return jsonify({'error': 'Milestone not found'}), 404
 
     json_data = {
-        'id':result.Meilenstein_ID,
-        'name':result.Meilenstein_Name,
-        'amount':result.Meilenstein_Betrag,
-        'description':result.Meilenstein_Beschreibung
+        'id':result.idMilestone,
+        'name':result.nameMilestone,
+        'amount':result.amountMilestone,
+        'description':result.descriptionMilestone
     }
         
     return jsonify(json_data), 200
@@ -71,12 +71,12 @@ def meilenstein_post(session):
         return jsonify({'error': "Empty parameter"}), 400
         
     if re.match("^[a-zA-ZäÄöÖüÜ ,.'-]+$", name) is None:
-        return jsonify({'error': 'name must contain only alphanumeric characters'}), 400
+        return jsonify({'error': 'name must contain only alphanumeric characters'}), 400 #Auch hier noch fehlerhafte IF-Anweisungen setze mich nach dem Refactoring daran
 
     try:        
-        meilenstein_inst = Meilenstein(Meilenstein_Name=name,
-                         Meilenstein_Betrag=amount,
-                         Meilenstein_Beschreibung=description)
+        meilenstein_inst = Milestone(nameMilestone=name,
+                         amountMilestone=amount,
+                         descriptionMilestone=description)
     except (KeyError, ValueError, DecodeError):  # jwt decode errors
         return jsonify({'status': 'Invalid JWT'}), 400
 

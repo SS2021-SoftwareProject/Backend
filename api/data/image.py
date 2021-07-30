@@ -34,46 +34,46 @@ def bild_by_id_get(session, id):
     except ValueError:
         return jsonify({'error': 'bad argument'}), 400
 
-    results = session.query(Bild)
+    results = session.query(Image)
 
     try:
         if id_bild:
-            results = results.filter(Bild.bild_id == id_bild).one()
+            results = results.filter(Image.idImage == id_bild).one()
         else:
             return jsonify({'error':'missing argument'}), 400
     except NoResultFound:
         return jsonify({'error': 'Picture not found'}), 404
 
     json_data = {
-        'id':result.Bild_ID,
-        'picture':result.Bild_Bild,
-        'description':result.Bild_Beschreibung,
-        'format':result.Bild_Format
+        'id':result.idImage,
+        'picture':result.fileImage,
+        'description':result.descriptionImage,
+        'format':result.formatImage
     }
         
     return jsonify(json_data), 200
 
 @BP.route('', methods=['POST'])
 @db_session_dec
-def meilenstein_post(session):
+def image_post(session):
     picture = request.headers.get('picture', default=None)
     description = request.headers.get('description', default=None)
     format = request.headers.get('format', default=None)
     
-    if None in [picture, description, format]:
+    if None in [picture, description, format]: 
         return jsonify({'error': 'Missing parameter'}), 400
 
     if "" in [picture, description, format]:
-        return jsonify({'error': "Empty parameter"}), 400
+        return jsonify({'error': "Empty parameter"}), 400  #beide If-Anweisungen sind noch Fehlerhaft setzte mich nach refactor dran
         
     try:        
-        bild_inst = Bild(Bild_Bild=picture,
-                         Bild_Beschreibung=description,
-                         Bild_Format=format)
+        bild_inst = Image(fileImage=picture,
+                         descriptionImage=description,
+                         formatImage=format) 
     except (KeyError, ValueError, DecodeError):  # jwt decode errors
         return jsonify({'status': 'Invalid JWT'}), 400
 
     session.add(bild_inst)
     session.commit()
-    return jsonify({'status': 'Picture registered'}), 201
+    return jsonify({'status': 'Bild POST war erfolgreich'}), 201 #hier auf status achten!
     

@@ -42,16 +42,16 @@ def ngo_by_id_get(session, id):
 
     try:
         if id_ngo:
-            results = results.filter(NGO.ngo_id == id_ngo).one()
+            results = results.filter(NGO.idNGO == id_ngo).one()
         else:
             return jsonify({'error':'missing argument'}), 400
     except NoResultFound:
         return jsonify({'error': 'NGO not found'}), 404
 
     json_data = {
-        'id':result.NGO_ID,
-        'name':result.NGO_Name,
-        'email':result.NGO_Email
+        'id':result.idNGO,
+        'name':result.nameNGO,
+        'email':result.emailNGO
     }
         
     return jsonify(json_data), 200
@@ -73,8 +73,8 @@ def ngo_put(ngo_inst):
     if re.match("^[a-zA-ZäÄöÖüÜ ,.'-]+$", name) is None:
         return jsonify({'error': 'name must contain only alphanumeric characters'}), 400
 
-    ngo_inst.NGO_Name = name
-    ngo_inst.NGO_Email = email
+    ngo_inst.nameNGO = name
+    ngo_inst.emailNGO = email
     
     return jsonify({'status': 'changed'}), 200
 
@@ -83,7 +83,7 @@ def ngo_put(ngo_inst):
 @db_session_dec
 def ngo_post(session):
     name = request.headers.get('name', default=None)
-    email = request.headers.get('enail', default=None)
+    email = request.headers.get('email', default=None)
     
     if email is not None and not validators.email(email):
         return jsonify({'error': 'email is not valid'}), 400
@@ -98,12 +98,12 @@ def ngo_post(session):
         return jsonify({'error': 'name must contain only alphanumeric characters'}), 400
 
     try:        
-        ngo_inst = NGO(NGO_Name=name,
-                         NGO_Email=email)
+        ngo_inst = NGO(nameNGO=name,
+                         emailNGO=email)
     except (KeyError, ValueError, DecodeError):  # jwt decode errors
         return jsonify({'status': 'Invalid JWT'}), 400
 
     session.add(ngo_inst)
     session.commit()
-    return jsonify({'status': 'NGO registered'}), 201
+    return jsonify({'status': 'NGO POST erfogreich'}), 201
     
