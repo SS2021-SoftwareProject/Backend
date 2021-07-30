@@ -25,6 +25,10 @@ def payment_get(session):
         })
         return jsonify(json_data)
 
+
+#Neue Methode die ueber User_Id die Payments bekommt
+
+
 @BP.route('/<id>', methods=['GET'])
 @db_session_dec
 def zahlung_by_id_get(session, id):
@@ -37,22 +41,21 @@ def zahlung_by_id_get(session, id):
     except ValueError:
         return jsonify({'error': 'bad argument'}), 400
 
-    results = session.query(Zahlung)
-
+    results = session.query(Payment)
+	
     try:
         if id_zahlung:
-            results = results.filter(Zahlung.zahlung_id == id_zahlung).one()
+            results = results.filter(Payment.idPayment == id_zahlung).one()
         else:
             return jsonify({'error':'missing argument'}), 400
     except NoResultFound:
         return jsonify({'error': 'Transaction not found'}), 404
 
     json_data = {
-        'id':result.Zahlung_ID,
-        'amount':result.Zahlung_Betrag,
-        'status':result.Zahlung_Status,
-        'date':result.Zahlung_Datum,
-        'time':result.Zahlung_Uhrzeit
+        'id':result.idPayment,
+        'amount':result.amountPayment,
+        'status':result.statePayment,
+        'date':result.datePayment
     }
         
     return jsonify(json_data), 200
@@ -62,18 +65,16 @@ def zahlung_put(zahlung_inst):
     amount = request.headers.get('amount', default=None)
     status = request.headers.get('status', default=None)
     date = request.headers.get('date', default=None)
-    time = request.headers.get('time', default=None)
 
-    if None in [amount, status, date, time]:
+    if None in [amount, status, date]:
         return jsonify({'error': 'Missing parameter'}), 400
 
-    if "" in [amount, status, date, time]:
-        return jsonify({'error': 'Empty parameter'}), 400
+    if "" in [amount, status, date]:
+        return jsonify({'error': 'Empty parameter'}), 400 #IF-Anweisung Fehlerhaft wird nach Refactor geändert
 
-    zahlung_inst.Zahlung_Betrag = amount
-    zahlung_inst.Zahlung_Status = status
-    zahlung_inst.Zahlung_Datum = date
-    zahlung_inst.Zahlung_Uhrzeit = time
+    zahlung_inst.amountPayment = amount
+    zahlung_inst.statePayment = status
+    zahlung_inst.datePayment = date
 
     return jsonify({'status': 'changed'}), 200
 
@@ -84,23 +85,21 @@ def zahlung_post(session):
     amount = request.headers.get('amount', default=None)
     status = request.headers.get('status', default=None)
     date = request.headers.get('date', default=None)
-    time = request.headers.get('time', default=None)
 
-    if None in [amount, status, date, time]:
+    if None in [amount, status, date]:
         return jsonify({'error': 'Missing parameter'}), 400
 
-    if "" in [amount, status, date, time]:
-        return jsonify({'error': "Empty parameter"}), 400
+    if "" in [amount, status, date]:
+        return jsonify({'error': "Empty parameter"}), 400 #IF-Anweisung Fehlerhaft wird nach Refactor geändert
 
     try:        
-        zahlung_inst = Zahlung(Zahlung_Betrag=amount,
-                         Zahlung_Status=status,
-                         Zahlung_Datum=date,
-                         Zahlung_Uhrzeit=time)
+        zahlung_inst = Payment(amountPayment=amount,
+                         statePayment=status,
+                         datePayment=date)
     except (KeyError, ValueError, DecodeError):  # jwt decode errors
         return jsonify({'status': 'Invalid JWT'}), 400
 
     session.add(zahlung_inst)
     session.commit()
-    return jsonify({'status': 'Transaction registered'}), 201
+    return jsonify({'status': 'Payment POST erfolgreich'}), 201
     

@@ -54,22 +54,22 @@ def project_by_id_get(session, id):
 
     try:
         if id_project:
-            results = results.filter(Project.Projekt_ID == id_project).one()
+            results = results.filter(Project.idProject == id_project).one()
         else:
             return jsonify({'error':'missing argument'}), 400
     except NoResultFound:
         return jsonify({'error': 'Projekt not found'}), 404
 
     json_data = {
-        'id':result.Projekt_ID,
-        'name':result.Projekt_Name,
-        'description':result.Projekt_Beschreibung,
-        'status':result.Projekt_Status,
-        'actualSum':result.Projekt_IstBetrag,
-        'shouldSum':result.Projekt_SollBetrag,
-        'paymentInformation':result.Projekt_Zahlungsinformation,
-        'page':result.Projekt_Page,
-        'shortDescription':result.Projekt_Kurzbeschreibung
+        'id':result.idProject,
+        'name':result.nameProject,
+        'description':result.descriptionProject,
+        'status':result.statusProject,
+        'actualSum':result.amountProject,
+        'shouldSum':result.shouldAmountProject,
+        'paymentInformation':result.paymentInformationProject,
+        'page':result.pageProject,
+        'shortDescription':result.shortdescriptionProject
     }
         
     return jsonify(json_data), 200
@@ -95,19 +95,20 @@ def projekt_post(session):
         return jsonify({'error': "Empty parameter"}), 400
 
     """acc = WEB3.eth.account.create()"""
-
-    projekt_inst = Project(Projekt_Name=name,
-                            Projekt_Description = description,
-                            Projekt_status = status,
-                            Projekt_istBetrag = actualSum,
-                            Projekt_sollBetrag = shouldSum,
-                            Projekt_Zahlungsinformation = paymentInformation,
-                            Projekt_Page = page,
-                            Projekt_Kurzbeschreibung = shortDescription
+    try:
+    	projekt_inst = Project(nameProject=name,
+                            descriptionProject = description,
+                            statusProject = status,
+                            amountProject = actualSum,
+                            shouldAmountProject = shouldSum,
+                            paymentInformationProject = paymentInformation,
+                            pageProject = page,
+                            shortdescriptionProject = shortDescription
                            )
-        
+        except (KeyError, ValueError, DecodeError):  # jwt decode errors
+        return jsonify({'status': 'Invalid JWT'}), 400
 
 
     session.add(project_inst)
     session.commit()
-    return jsonify({'status': 'Project registered'}), 201
+    return jsonify({'status': 'Project POST erfolgreich'}), 201
