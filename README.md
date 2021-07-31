@@ -4,11 +4,17 @@ install.sh ausführen
 
 
 sudo mysql -u root -p
+
 create database backend;
+
 use backend;
+
 CREATE USER 'rootApi'@'localhost' IDENTIFIED BY 'thiel';
+
 GRANT ALL PRIVILEGES ON backend.* TO 'rootApi'@'localhost';
+
 FLUSH PRIVILEGES;
+
 quit;
 
 Wenn ihr Bibliotheken benötigt die noch nicht im requirements stehen einfach eintragen und 
