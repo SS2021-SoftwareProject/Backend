@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from .dbStructure import BASE
 
-DB_URI = "mariadb+mariadbconnector://root:raspberry@127.0.0.1:3306/backend"
+DB_URI = "mariadb+mariadbconnector://rootApi:thiel@127.0.0.1:3306/backend"
 ENGINE = create_engine(DB_URI)
 
 DB_SESSION: scoped_session = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=ENGINE))

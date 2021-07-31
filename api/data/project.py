@@ -96,7 +96,7 @@ def projekt_post(session):
 
     """acc = WEB3.eth.account.create()"""
     try:
-    	projekt_inst = Project(nameProject=name,
+        projekt_inst = Project(nameProject=name,
                             descriptionProject = description,
                             statusProject = status,
                             amountProject = actualSum,
@@ -105,8 +105,9 @@ def projekt_post(session):
                             pageProject = page,
                             shortdescriptionProject = shortDescription
                            )
-        except (KeyError, ValueError, DecodeError):  # jwt decode errors
+    except (KeyError, ValueError, DecodeError):  # jwt decode errors
         return jsonify({'status': 'Invalid JWT'}), 400
+
 
 
     session.add(project_inst)

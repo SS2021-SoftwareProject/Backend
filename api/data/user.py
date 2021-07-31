@@ -5,7 +5,7 @@ from flask import Blueprint, request, jsonify
 from sqlalchemy import func
 from api.db.dbStructure import User
 from .annotations import db_session_dec,auth_user
-from api.contracts.web3 import WEB3
+#from api.contracts.web3 import WEB3
 
 BP = Blueprint('user', __name__, url_prefix='/api/users')
 
