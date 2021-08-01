@@ -1,4 +1,19 @@
 # Backend
+# Team
+
+Name | Github | Role
+
+------------ | ------------ | ------------
+
+Jan Ehreke | Epixware | Project lead
+Michel | smierx | Backend Developer
+Niklas Lange | niklas9937 | Backend Developer
+Sören | FlatCatSociety | Backend Developer
+Alesia | Kushurando | Backend Developer
+Thomas | tmorbe | Backend Developer
+Olly/Tereya/Ju | Saryna42 |Backend Developer      
+
+
 ## Virtual Enviroment
 install.sh ausführen
 
