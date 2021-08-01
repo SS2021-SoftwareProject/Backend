@@ -22,6 +22,15 @@ alter table ZAHLUNG
 alter table ZAHLUNG 
    drop foreign key FK_ZAHLUNG_ZAHLUNG_U_USER;
 
+alter table SOLUTION 
+   drop foreign key FK_SOLUTION_SOLUTION_BILDSOLUTION_BILD;
+
+alter table SUMMARY 
+   drop foreign key FK_SUMMARY_SUMMARY_BILDSUMMARY_BILD;
+
+alter table PROBLEM 
+   drop foreign key FK_PROBLEM_PROBLEM_BILDPROBLEM_BILD
+
 drop table if exists BILD;
 
 
@@ -42,10 +51,26 @@ alter table PROJEKT
 alter table PROJEKT 
    drop foreign key FK_PROJEKT_NGA_PROJE_NGO;
 
+alter table PROJEKT 
+   drop foreign key FK_PROJEKT_PROJEKT_PROB_PROBLEM;
+
+alter table PROJEKT 
+   drop foreign key FK_PROJEKT_PROJEKT_SM_SUMMARY;
+
+alter table PROJEKT 
+   drop foreign key FK_PROJEKT_PROJEKT_S_SOLUTION;
+
+
 drop table if exists PROJEKT;
 
-drop table if exists USER;
+drop table id exists SUMMARY;
 
+drop table id exists PROBLEM;
+
+drop table id exists SOLUTION;
+
+
+drop table if exists USER;
 
 alter table ZAHLUNG 
    drop foreign key FK_ZAHLUNG_ZAHLUNG_P_PROJEKT;
@@ -100,14 +125,15 @@ create table PROJEKT
    PROJEKT_ID           int not null  comment '',
    NGO_ID               int not null  comment '',
    BILD_ID              int  comment '',
+   SOLUTION_ID          int not null  comment '',
+   SUMMARY_ID           int not null  comment '',
+   PROBLEM_ID           int not null  comment '',
    PROJEKT_NAME         varchar(256)  comment '',
-   PROJEKT_BESCHREIBUNG text  comment '',
    PROJEKT_STATUS       bool not null  comment '',
    PROJEKT_ISTBETRAG    float  comment '',
    PROJEKT_SOLLBETRAG   float  comment '',
    PROJEKT_ZAHLUNGSINFORMATIONEN varchar(256)  comment '',
    PROJEKT_PAGE         varchar(256)  comment '',
-   PROJEKT_KURZBESCHREIBUNG varchar(256)  comment '',
    primary key (PROJEKT_ID)
 );
 
@@ -142,6 +168,30 @@ create table ZAHLUNG
    primary key (ZAHLUNG_ID)
 );
 
+create table SOLUTION
+(
+   SOLUTION_ID          int not null comment '',
+   SOLUTION_BESCHREIBUNG   text not full comment'',
+   IMAGE_ID             int not not comment ''
+   primary key (SOLUTION_ID)
+)
+
+create table SUMMARY
+(
+   SUMMARY_ID          int not null comment '',
+   SUMMARY_BESCHREIBUNG   text not full comment'',
+   IMAGE_ID             int not not comment ''
+   primary key (SUMMARY_ID)
+)
+
+create table PROBLEM
+(
+   PROBLEM_ID          int not null comment '',
+   PROBLEM_BESCHREIBUNG   text not full comment'',
+   IMAGE_ID             int not not comment ''
+   primary key (PROBLEM_ID)
+)
+
 alter table MEILENSTEIN add constraint FK_MEILENST_BILD_MEIL_BILD foreign key (BILD_ID)
       references BILD (BILD_ID) on delete restrict on update restrict;
 
@@ -159,4 +209,27 @@ alter table ZAHLUNG add constraint FK_ZAHLUNG_ZAHLUNG_P_PROJEKT foreign key (PRO
 
 alter table ZAHLUNG add constraint FK_ZAHLUNG_ZAHLUNG_U_USER foreign key (USER_ID)
       references USER (USER_ID) on delete restrict on update restrict;
+
+alter table PROJEKT add constraint FK_PROJEKT_PROJEKT_S_SOLUTION foreign key (SOLUTION_ID)
+      references SOLUTION (SOLUTION_ID) on delete restrict on update restrict;
+
+alter table PROJEKT add constraint FK_PROJEKT_PROJEKT_SM_SUMMARY foreign key (SUMMARY_ID)
+      references SUMMARY (SUMMARY_ID) on delete restrict on update restrict;
+
+alter table PROJEKT add constraint FK_PROJEKT_PROJEKT_PROB_PROBLEM foreign key (PROBLEM_ID)
+      references PROBLEM (PROBLEM_ID) on delete restrict on update restrict;
+
+alter table SOLUTION add constraint FK_SOLUTION_SOLUTION_BILDSOLUTION_BILD foreign key (BILD_ID)
+      references BILD (BILD_ID) on delete restrict on update restrict;
+
+alter table SUMMARY add constraint FK_SUMMARY_SUMMARY_BILDSUMMARY_BILD foreign key (BILD_ID)
+      references BILD (BILD_ID) on delete restrict on update restrict;
+
+alter table PROBLEM add constraint FK_PROBLEM_PROBLEM_BILDPROBLEM_BILD foreign key (BILD_ID)
+      references BILD (BILD_ID) on delete restrict on update restrict;
+
+
+
+
+
 

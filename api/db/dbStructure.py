@@ -9,14 +9,16 @@ class Project(BASE):
     idProject = Column(Integer,primary_key=True,autoincrement=True)
     idNGO = Column(Integer,ForeignKey("NGO.idNGO"))
     idImage = Column(Integer,ForeignKey("Image.idImage"))
+    idSolution = Column(Integer,ForeignKey("Image.idSolution"))
+    idSummary = Column(Integer,ForeignKey("Image.idSummary"))
+    idProblem = Column(Integer,ForeignKey("Image.idProblem"))
     nameProject = Column(VARCHAR(256))
-    descriptionProject = Column(TEXT)
     statusProject = Column(Integer)
     amountProject = Column(Float)
     shouldAmountProject = Column(Float)
     paymentInformationProject = Column(VARCHAR(256))
     pageProject = Column(VARCHAR(256))
-    shortdescriptionProject = Column(TEXT)
+    
 
     milestone = relationship("Milestone",back_populates="project")
 
@@ -66,3 +68,21 @@ class NGO(BASE):
     idNGO = Column(Integer,primary_key=True,autoincrement=True)
     nameNGO = Column(VARCHAR(256))
     emailNGO = Column(VARCHAR(256))
+
+class Solution(BASE):
+    __tablename__ = "Solution"
+    idSolution = Column(Integer, primary_key=True, autoincrement=True)
+    idImage = Column(Integer,ForeignKey("Image.idImage"))
+    descriptionSolution= Column(TEXT)
+
+class Summary(BASE):
+    __tablename__ = "Summary"
+    idSummary = Column(Integer, primary_key=True, autoincrement=True)
+    idImage = Column(Integer,ForeignKey("Image.idImage"))
+    descriptionSummary= Column(TEXT)
+
+class Problem(BASE):
+    __tablename__ = "Problem"
+    idProblem = Column(Integer, primary_key=True, autoincrement=True)
+    idImage = Column(Integer,ForeignKey("Image.idImage"))
+    descriptionProblem= Column(TEXT)
