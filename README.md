@@ -2,10 +2,12 @@
 ## Virtual Enviroment
 install.sh ausführen
 
-
+```
 sudo mysql -u root -p
-
+```
+```
 create database backend;
+```
 
 use backend;
 
