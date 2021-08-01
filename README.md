@@ -4,10 +4,8 @@ install.sh ausführen
 
 ```
 sudo mysql -u root -p
-```
-```
+
 create database backend;
-```
 
 use backend;
 
@@ -18,11 +16,14 @@ GRANT ALL PRIVILEGES ON backend.* TO 'rootApi'@'localhost';
 FLUSH PRIVILEGES;
 
 quit;
+```
 
 Wenn ihr Bibliotheken benötigt die noch nicht im requirements stehen einfach eintragen und 
+```
 source venv/bin/activate
-pip install -r requirements.txt
- ausführen
+pip3 install -r requirements.txt
+```
+ausführen
 
 
 **Wallet Zugang**
