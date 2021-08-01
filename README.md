@@ -2,9 +2,7 @@
 # Team
 
 Name | Github | Role
-
 ------------ | ------------ | ------------
-
 Jan Ehreke | Epixware | Project lead
 Michel | smierx | Backend Developer
 Niklas Lange | niklas9937 | Backend Developer
