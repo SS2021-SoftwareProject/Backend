@@ -4,9 +4,9 @@
 Name | Github | Role
 ------------ | ------------ | ------------
 Jan Ehreke | Epixware | Project lead
-Michel | smierx | Backend Developer
+Michel Dudas | smierx | Backend Developer
 Niklas Lange | niklas9937 | Backend Developer
-Sören | FlatCatSociety | Backend Developer
+Sören Kröger | FlatCatSociety | Backend Developer
 Jannis Herbertz | Kushurando | Backend Developer
 Thomas | tmorbe | Backend Developer
 Oliver Maciejewski | Saryna42 | Backend Developer      
