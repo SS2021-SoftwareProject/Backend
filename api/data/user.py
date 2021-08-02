@@ -65,12 +65,15 @@ def user_by_id_get(session, id):
 
 
 @BP.route('/signup', methods=['POST'])
+@db_session_dec
 def signup_post(session):
-    email = request.form.get('email')
-    password = request.form.get('password')
-    firstname = request.form.get('firstname')
-    lastname = request.form.get('lastname')
-    user = User.query.filter_by(emailUser=email).first()
+    email = request.headers.get('email')
+    password = request.headers.get('password')
+    firstname = request.headers.get('firstname')
+    lastname = request.headers.get('lastname')
+    results = session.query(User)
+
+    user = results.filter(User.emailUser == email).first()
     if None in [firstname, lastname, email, password]:
         return jsonify({'error': 'Missing parameter'}), 400
 
@@ -84,17 +87,18 @@ def signup_post(session):
         return jsonify({'error': 'Invalid credentials, user already exists'}), 400
     new_user = User(emailUser = email, firstNameUser = firstname, lastNameUser = lastname, passwordtokenUser = password)
     session.add(new_user)
-    session.commit
-
+    session.commit()
     return jsonify({'success': 'User has been created'}), 200
 
 
 @BP.route('/login', methods=['POST'])
+@db_session_dec
 def login_post(session):
     email = request.form.get('email')
     password = request.form.get('password')
 
-    user = User.query.filter_by(emailUser = email).first()
+    results = session.query(User)
+    user = results.filter(emailUser=email).first()
     if not user or not user.passwordtokenUser == password:
         return jsonify({'error': 'Invalid credentials'}), 403
     return jsonify({'success': 'User logged in'}), 200
