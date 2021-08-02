@@ -154,3 +154,13 @@ def add_sample_data():
             nameNGO="Ran out of ideas",
             emailNGO="ran.out.of.ideas@example.com"),
     ]
+
+    # relationship sample assignments
+    
+    # TODO: projects sample data
+
+    milestones[0].project = projects[0]
+    milestones[1].project = projects[0]
+    milestones[2].project = projects[1]
+    milestones[3].project = projects[1]
+    milestones[4].project = projects[2]
