@@ -1,6 +1,7 @@
 # This file is not a working function or executable data, just the structure for some random values.
 
 from datetime import datetime
+from db.dbStructure import Image, NGO, Problem, Project, Solution, Summary
 from typing import List
 
 def add_sample_data():
@@ -155,9 +156,124 @@ def add_sample_data():
             emailNGO="ran.out.of.ideas@example.com"),
     ]
 
+    # fictional solution, sample data
+
+
+    solutions: List[Solution] = [
+        Solution(idSolution =1,
+                descriptionSolution="One way to solve the problem Nr.1"),
+        Solution(idSolution =2,
+                descriptionSolution="One way to solve the problem Nr.2"),
+        Solution(idSolution =3,
+                descriptionSolution="One way to solve the problem Nr.3")
+    
+    ]
+
+    # set Image to Solution
+
+    solutions[0].idImage = images[0].idImage
+    solutions[1].idImage = images[1].idImage
+    solutions[2].idImage = images[2].idImage
+
+
+    # fictional summary, sample data
+
+
+    summaries: List[Summary] = [
+        Summary(idSummery =1,
+                descriptionSummery="A summary of the project Nr.1"),
+        Summary(idSummery =2,
+                descriptionSummery="A summary of the project Nr.2"),
+        Summary(idSummery =3,
+                descriptionSummery="A summary of the project Nr.3")
+    
+    ]
+
+    # set Image to Summery
+
+    summaries[0].idImage = images[0].idImage
+    summaries[1].idImage = images[1].idImage
+    summaries[2].idImage = images[2].idImage
+
+
+    # fictional problem, sample data
+
+
+    problems: List[Problem] = [
+        Problem(idProblem=1,
+                descriptionProblem="A problem from the project Nr.1"),
+        Problem(idProblem =2,
+                descriptionProblem="A problem from the project Nr.2"),
+        Problem(idProblem =3,
+                descriptionProblem="A problem from the project Nr.3")
+    
+    ]
+
+    # set Image to Problem
+    
+    problems[0].idImage = images[0].idImage
+    problems[1].idImage = images[1].idImage
+    problems[2].idImage = images[2].idImage
+
+
+    # fictional project, sample data
+
+    projects: List[Project] = [
+        Project(idProject=1,
+                nameProject= "Test Project Nr.1",
+                statusProject= "in progress",
+                amountProject=500,
+                shouldAmountProject= 10000,
+                paymentInformationProject="some Payment informations ",
+                pageProject= "www.Project1.com"
+                ),
+
+        Project(idProject=2,
+                nameProject= "Test Project Nr.2",
+                statusProject= "finished",
+                amountProject=5000,
+                shouldAmountProject= 5000,
+                paymentInformationProject="some Payment informations ",
+                pageProject= "www.Project2.com"
+                ),
+
+        Project(idProject=3,
+                nameProject= "Test Project Nr.3",
+                statusProject= "almost finished",
+                amountProject=2500,
+                shouldAmountProject= 3000,
+                paymentInformationProject="some Payment informations ",
+                pageProject= "www.Project3.com"
+                )
+
+    ]
+
+    # foreign key assignments for projects
+
+    projects[0].idImage = images[0].idImage
+    projects[0].idNGO =ngos[0].idNGO
+    projects[0].idProblem=problems[0].idProblem
+    projects[0].idSolution= solutions[0].idSolution
+    projects[0].idSummary = summaries[0].idSummary 
+
+    projects[1].idImage = images[1].idImage
+    projects[1].idNGO =ngos[1].idNGO
+    projects[1].idProblem=problems[1].idProblem
+    projects[1].idSolution= solutions[1].idSolution
+    projects[1].idSummary = summaries[1].idSummary 
+
+    projects[2].idImage = images[2].idImage
+    projects[2].idNGO =ngos[2].idNGO
+    projects[2].idProblem=problems[2].idProblem
+    projects[2].idSolution= solutions[2].idSolution
+    projects[2].idSummary = summaries[2].idSummary 
+
+
+
+    
+
     # relationship sample assignments
     
-    # TODO: projects sample data
 
     milestones[0].project = projects[0]
     milestones[1].project = projects[0]
