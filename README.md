@@ -8,7 +8,7 @@ Michel Dudas | smierx | Backend Developer
 Niklas Lange | niklas9937 | Backend Developer
 Sören Kröger | FlatCatSociety | Backend Developer
 Jannis Herbertz | Kushurando | Backend Developer
-Thomas | tmorbe | Backend Developer
+Thomas Morbe| tmorbe | Backend Developer
 Oliver Maciejewski | Saryna42 | Backend Developer      
 
 
