@@ -167,11 +167,11 @@ def add_sample_data():
     
     # foreign key assignments
 
-    milestones[0].idImage = projects[0].idImage
-    milestones[1].idImage = projects[1].idImage
-    milestones[2].idImage = projects[2].idImage
-    milestones[3].idImage = projects[3].idImage
-    milestones[4].idImage = projects[4].idImage
+    milestones[0].idImage = images[0].idImage
+    milestones[1].idImage = images[1].idImage
+    milestones[2].idImage = images[2].idImage
+    milestones[3].idImage = images[3].idImage
+    milestones[4].idImage = images[4].idImage
 
     milestones[0].idProject = projects[0].idProject
     milestones[1].idProject = projects[0].idProject
