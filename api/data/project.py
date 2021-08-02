@@ -97,8 +97,8 @@ def description_by_project_id_get(session, id):
     results = session.query(Project)
     sumRes = session.query(Summary)
     imageRes = session.query(Image)
-    probRes = session.querry(Problem)
-    solRes = session.querry(Solution)
+    probRes = session.query(Problem)
+    solRes = session.query(Solution)
     sumImage = ""
     probImage = ""
     solImage = ""
