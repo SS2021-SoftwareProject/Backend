@@ -1,0 +1,91 @@
+import requests
+
+url = "http://127.0.0.1:5000/api/projects"
+obj = {
+    'nameProject':"TestProjekt",
+    'statusProject':"0",
+    'amountProject':"1222.0",
+    'shouldAmountProject':"4984844.0",
+    'paymentInformationProject':"kein Plan",
+    'pageProject':"https://google.com"
+}
+x = requests.post(url,headers = obj)
+print(x.text)
+
+
+url = "http://127.0.0.1:5000/api/projects"
+obj = {
+    'nameProject':"ZweitesTestProjekt",
+    'statusProject':"0",
+    'amountProject':"1222.0",
+    'shouldAmountProject':"8888.0",
+    'paymentInformationProject':"Immernoch kein Plan",
+    'pageProject':"https://google.com"
+}
+x = requests.post(url,headers = obj)
+print(x.text)
+
+
+url = "http://127.0.0.1:5000/api/milestone"
+obj = {
+    "nameMilestone":"erstes",
+    "amountMilestone":"800.0",
+    "descriptionMilestone":"jiojaisd",
+    "idProject":"2"
+}
+x = requests.post(url,headers = obj)
+print(x.text)
+
+url = "http://127.0.0.1:5000/api/milestone"
+obj = {
+    "nameMilestone":"zweites",
+    "amountMilestone":"999.0",
+    "descriptionMilestone":"dddddasda",
+    "idProject":"2"
+}
+x = requests.post(url,headers = obj)
+print(x.text)
+
+url = "http://127.0.0.1:5000/api/milestone"
+obj = {
+    "nameMilestone":"Drittes",
+    "amountMilestone":"222.0",
+    "descriptionMilestone":"ffefegegegg",
+    "idProject":"1"
+}
+x = requests.post(url,headers = obj)
+print(x.text)
+
+
+url = "http://127.0.0.1:5000/api/users/signup"
+obj = {
+    "email":"test@test.com",
+    "password":"123",
+    "firstname":"tester",
+    "lastname":"testy"
+}
+x = requests.post(url,headers = obj)
+print(x.text)
+
+
+url = "http://127.0.0.1:5000/api/payment"
+obj = {
+    "idUser":"1",
+    "idProject":"1",
+    "amountPayment":"100.0",
+    "statePayment":"2"
+}
+x = requests.post(url,headers = obj)
+print(x.text)
+
+
+url = "http://127.0.0.1:5000/api/payment"
+obj = {
+    "idUser":"1",
+    "idProject":"2",
+    "amountPayment":"200.0",
+    "statePayment":"1"
+}
+x = requests.post(url,headers = obj)
+print(x.text)
+

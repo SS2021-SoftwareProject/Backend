@@ -2,6 +2,7 @@ from sqlalchemy import Column,Integer,VARCHAR,TEXT,Float,ForeignKey,BINARY,DATET
 from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
 from sqlalchemy.orm import relationship
 
+
 BASE: DeclarativeMeta = declarative_base()
 
 class Project(BASE):

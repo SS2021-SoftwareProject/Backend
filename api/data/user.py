@@ -1,10 +1,14 @@
 """User Resource."""
+
 import re
 import validators
 from flask import Blueprint, request, jsonify
 from sqlalchemy import func
 from api.db.dbStructure import User
+from api.db.dbStructure import Payment
 from .annotations import db_session_dec,auth_user
+from sqlalchemy.orm.exc import NoResultFound
+
 #from api.contracts.web3 import WEB3
 
 BP = Blueprint('user', __name__, url_prefix='/api/users')
@@ -25,7 +29,7 @@ def users_get(session):
             'Publickey':result.publickeyUser,
             'Privatekey':result.privatkeyUser,
             'RegisterDate':result.registryAtUser,
-            'balance':balance
+            #'balance':balance
         })
     return jsonify(json_data)
 
@@ -51,26 +55,64 @@ def user_by_id_get(session, id):
         return jsonify({'error': 'User not found'}), 404
 
     json_data = {
-        'id':result.idUser,
-        'firstname':result.firstNameUser,
-        'lastname':result.lastNameUser,
-        'email':result.emailUser,
-        'PasswordToken':result.passwordtokenUser,
-        'Publickey':result.publickeyUser,
-        'Privatekey':result.privatkeyUser,
-        'RegisterDate':result.registryAtUser
+        'id':results.idUser,
+        'firstname':results.firstNameUser,
+        'lastname':results.lastNameUser,
+        'email':results.emailUser,
+        'PasswordToken':results.passwordtokenUser,
+        'Publickey':results.publickeyUser,
+        'Privatekey':results.privatkeyUser,
+        'RegisterDate':results.registryAtUser,
     }
         
     return jsonify(json_data), 200
 
 
+@BP.route('contributions/<id>', methods=['GET'])
+@db_session_dec
+def contributions_by_user_id_get(session, id):
+    user_id = id
+
+    try:
+        if user_id:
+            int(user_id)
+    except ValueError:
+        return jsonify({'error': 'bad argument'}), 400
+
+    results = session.query(Payment)
+
+
+    try:
+        if user_id:
+            results = results.filter(Payment.idUser == user_id)
+        else:
+            return jsonify({'error':'missing argument'}), 400
+    except NoResultFound:
+        return jsonify({'error': 'Transaction not found'}), 404
+
+    json_data = []
+
+    for result in results:
+        json_data.append({
+            'id':result.idPayment,
+            'date':result.datePayment,
+            'amount':result.amountPayment,
+            'project':result.idProject,
+            'state':result.statePayment
+        })
+
+    return jsonify(json_data)
+
+
 @BP.route('/signup', methods=['POST'])
+@db_session_dec
 def signup_post(session):
-    email = request.form.get('email')
-    password = request.form.get('password')
-    firstname = request.form.get('firstname')
-    lastname = request.form.get('lastname')
-    user = User.query.filter_by(emailUser=email).first()
+    email = request.headers.get('email')
+    password = request.headers.get('password')
+    firstname = request.headers.get('firstname')
+    lastname = request.headers.get('lastname')
+    results = session.query(User)
+    user = results.filter(User.emailUser == email).first()
     if None in [firstname, lastname, email, password]:
         return jsonify({'error': 'Missing parameter'}), 400
 
@@ -84,17 +126,18 @@ def signup_post(session):
         return jsonify({'error': 'Invalid credentials, user already exists'}), 400
     new_user = User(emailUser = email, firstNameUser = firstname, lastNameUser = lastname, passwordtokenUser = password)
     session.add(new_user)
-    session.commit
-
+    session.commit()
     return jsonify({'success': 'User has been created'}), 200
 
 
 @BP.route('/login', methods=['POST'])
+@db_session_dec
 def login_post(session):
-    email = request.form.get('email')
-    password = request.form.get('password')
+    email = request.headers.get('email')
+    password = request.headers.get('password')
 
-    user = User.query.filter_by(emailUser = email).first()
+    results = session.query(User)
+    user = results.filter(User.emailUser == email).first()
     if not user or not user.passwordtokenUser == password:
         return jsonify({'error': 'Invalid credentials'}), 403
     return jsonify({'success': 'User logged in'}), 200

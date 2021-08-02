@@ -4,6 +4,7 @@ import validators
 from flask import Blueprint, request, jsonify
 from sqlalchemy import func
 from api.db.dbStructure import Milestone
+from sqlalchemy.orm.exc import NoResultFound
 from .annotations import db_session_dec
 
 BP = Blueprint('milestone', __name__, url_prefix='/api/milestone')
@@ -48,22 +49,86 @@ def meilenstein_by_id_get(session, id):
         return jsonify({'error': 'Milestone not found'}), 404
 
     json_data = {
-        'id':result.idMilestone,
-        'name':result.nameMilestone,
-        'amount':result.amountMilestone,
-        'description':result.descriptionMilestone
+        'id':results.idMilestone,
+        'name':results.nameMilestone,
+        'amount':results.amountMilestone,
+        'description':results.descriptionMilestone,
+        'idImage':results.idImage,
+        'idProject':results.idProject
     }
         
     return jsonify(json_data), 200
 
+@BP.route('/byprojectid/<id>', methods=['GET'])
+@db_session_dec
+def meilenstein_by_project_id_get(session, id):
+    project_id = id
+    try:
+        if project_id:
+            int(project_id)
+    except ValueError:
+        return jsonify({'error': 'bad argument'}), 400
+    results = session.query(Milestone)
+    try:
+        if project_id:
+            results = results.filter(Milestone.idProject == project_id)
+        else:
+            return jsonify({'error':'missing argument'}), 400
+    except NoResultFound:
+        return jsonify({'error': 'Milestones not found'}), 404
+    
+    json_data = []
+
+    for result in results:
+        json_data.append({
+            'name':result.nameMilestone,
+            'amount':result.amountMilestone,
+            'description':result.descriptionMilestone
+        })
+
+    return jsonify(json_data)
+
+@BP.route('/byprojectidfull/<id>', methods=['GET'])
+@db_session_dec
+def full_meilenstein_by_project_id_get(session, id):
+    project_id = id
+    try:
+        if project_id:
+            int(project_id)
+    except ValueError:
+        return jsonify({'error': 'bad argument'}), 400
+    results = session.query(Milestone)
+    try:
+        if project_id:
+            results = results.filter(Milestone.idProject == project_id)
+        else:
+            return jsonify({'error':'missing argument'}), 400
+    except NoResultFound:
+        return jsonify({'error': 'Milestones not found'}), 404
+    
+    json_data = []
+
+    for result in results:
+        json_data.append({
+            'id':result.idMilestone,
+            'image':result.idImage,
+            'name':result.nameMilestone,
+            'amount':result.amountMilestone,
+            'description':result.descriptionMilestone
+        })
+
+    return jsonify(json_data)
 
 @BP.route('', methods=['POST'])
 @db_session_dec
 def meilenstein_post(session):
-    name = request.headers.get('name', default=None)
-    amount = request.headers.get('amount', default=None)
-    description = request.headers.get('description', default=None)
+    name = request.headers.get('nameMilestone', default=None)
+    amount = request.headers.get('amountMilestone', default=None)
+    description = request.headers.get('descriptionMilestone', default=None)
+    imageID = request.headers.get('idImage', default=None)
+    projectID = request.headers.get('idProject',default=None)
     
+
     if None in [name, amount, description]:
         return jsonify({'error': 'Missing parameter'}), 400
 
@@ -76,7 +141,9 @@ def meilenstein_post(session):
     try:        
         meilenstein_inst = Milestone(nameMilestone=name,
                          amountMilestone=amount,
-                         descriptionMilestone=description)
+                         descriptionMilestone=description,
+                         idImage=imageID,
+                         idProject=projectID)
     except (KeyError, ValueError, DecodeError):  # jwt decode errors
         return jsonify({'status': 'Invalid JWT'}), 400
 

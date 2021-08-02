@@ -4,6 +4,7 @@ import validators
 from flask import Blueprint, request, jsonify
 from sqlalchemy import func
 from api.db.dbStructure import Image
+from sqlalchemy.orm.exc import NoResultFound
 from .annotations import db_session_dec
 
 BP = Blueprint('image', __name__, url_prefix='/api/image')
@@ -45,10 +46,10 @@ def bild_by_id_get(session, id):
         return jsonify({'error': 'Picture not found'}), 404
 
     json_data = {
-        'id':result.idImage,
-        'picture':result.fileImage,
-        'description':result.descriptionImage,
-        'format':result.formatImage
+        'id':results.idImage,
+        'picture':results.fileImage,
+        'description':results.descriptionImage,
+        'format':results.formatImage
     }
         
     return jsonify(json_data), 200
@@ -56,14 +57,14 @@ def bild_by_id_get(session, id):
 @BP.route('', methods=['POST'])
 @db_session_dec
 def image_post(session):
-    picture = request.headers.get('picture', default=None)
-    description = request.headers.get('description', default=None)
-    format = request.headers.get('format', default=None)
+    picture = request.headers.get('fileImage', default=None)
+    description = request.headers.get('descriptionImage', default=None)
+    format = request.headers.get('formatImage', default=None)
     
-    if None in [picture, description, format]: 
+    if None in [picture, format]: 
         return jsonify({'error': 'Missing parameter'}), 400
 
-    if "" in [picture, description, format]:
+    if "" in [picture, format]:
         return jsonify({'error': "Empty parameter"}), 400  #beide If-Anweisungen sind noch Fehlerhaft setzte mich nach refactor dran
         
     try:        

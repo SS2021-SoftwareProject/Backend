@@ -4,6 +4,7 @@ import validators
 from flask import Blueprint, request, jsonify
 from sqlalchemy import func
 from api.db.dbStructure import NGO
+from sqlalchemy.orm.exc import NoResultFound
 from .annotations import db_session_dec
 
 
@@ -49,17 +50,17 @@ def ngo_by_id_get(session, id):
         return jsonify({'error': 'NGO not found'}), 404
 
     json_data = {
-        'id':result.idNGO,
-        'name':result.nameNGO,
-        'email':result.emailNGO
+        'id':results.idNGO,
+        'name':results.nameNGO,
+        'email':results.semailNGO
     }
         
     return jsonify(json_data), 200
 
 @BP.route('', methods=['PUT'])
 def ngo_put(ngo_inst):
-    name = request.headers.get('name', default=None)
-    email = request.headers.get('email', default=None)
+    name = request.headers.get('nameNGO', default=None)
+    email = request.headers.get('emailNGO', default=None)
     
     if email is not None and not validators.email(email):
         return jsonify({'error': 'email is not valid'}), 400
@@ -82,8 +83,8 @@ def ngo_put(ngo_inst):
 @BP.route('', methods=['POST'])
 @db_session_dec
 def ngo_post(session):
-    name = request.headers.get('name', default=None)
-    email = request.headers.get('email', default=None)
+    name = request.headers.get('nameNGO', default=None)
+    email = request.headers.get('emailNGO', default=None)
     
     if email is not None and not validators.email(email):
         return jsonify({'error': 'email is not valid'}), 400

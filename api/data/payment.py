@@ -3,8 +3,10 @@ import re
 import validators
 from flask import Blueprint, request, jsonify
 from sqlalchemy import func
-from api.db.dbStructure import Payment
 from .annotations import db_session_dec
+from datetime import datetime
+from sqlalchemy.orm.exc import NoResultFound
+from api.db.dbStructure import Payment
 
 BP = Blueprint('payment', __name__, url_prefix='/api/payment')
 
@@ -23,7 +25,7 @@ def payment_get(session):
             'status':result.statePayment,
             'datetime':result.datePayment,
         })
-        return jsonify(json_data)
+    return jsonify(json_data)
 
 
 #Neue Methode die ueber User_Id die Payments bekommt
@@ -52,19 +54,21 @@ def zahlung_by_id_get(session, id):
         return jsonify({'error': 'Transaction not found'}), 404
 
     json_data = {
-        'id':result.idPayment,
-        'amount':result.amountPayment,
-        'status':result.statePayment,
-        'date':result.datePayment
+        'id':results.idPayment,
+        'idUser':results.idUser,
+        'amount':results.amountPayment,
+        'status':results.statePayment,
+        'datetime':results.datePayment,
     }
         
     return jsonify(json_data), 200
 
 @BP.route('', methods=['PUT'])
 def zahlung_put(zahlung_inst):
-    amount = request.headers.get('amount', default=None)
-    status = request.headers.get('status', default=None)
-    date = request.headers.get('date', default=None)
+    amount = request.headers.get('amountPayment', default=None)
+    status = request.headers.get('statePayment', default=None)
+    date = request.headers.get('datePayment', default=datetime.now())
+
 
     if None in [amount, status, date]:
         return jsonify({'error': 'Missing parameter'}), 400
@@ -82,9 +86,12 @@ def zahlung_put(zahlung_inst):
 @BP.route('', methods=['POST'])
 @db_session_dec
 def zahlung_post(session):
-    amount = request.headers.get('amount', default=None)
-    status = request.headers.get('status', default=None)
-    date = request.headers.get('date', default=None)
+    user = request.headers.get('idUser',default=None)
+    project = request.headers.get('idProject', default=None)
+    amount = request.headers.get('amountPayment', default=None)
+    status = request.headers.get('statePayment', default=None)
+    date = request.headers.get('datePayment', default=datetime.now())
+    
 
     if None in [amount, status, date]:
         return jsonify({'error': 'Missing parameter'}), 400
@@ -95,7 +102,9 @@ def zahlung_post(session):
     try:        
         zahlung_inst = Payment(amountPayment=amount,
                          statePayment=status,
-                         datePayment=date)
+                         datePayment=date,
+                         idProject = project,
+                         idUser = user)
     except (KeyError, ValueError, DecodeError):  # jwt decode errors
         return jsonify({'status': 'Invalid JWT'}), 400
 
