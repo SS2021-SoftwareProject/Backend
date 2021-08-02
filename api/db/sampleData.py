@@ -109,3 +109,28 @@ def add_sample_data():
             registryAtUser=datetime(2005, 9, 4),
             balanceUser=69),
     ]
+
+    # fictional payment, sample data
+
+    payments: List[Payment] = [
+        Payment(idPayment=1,
+            amountPayment=69,
+            statePaynment="completed",
+            datePayment=datetime(2020, 3, 7)),
+        Payment(idPayment=2,
+            amountPayment=420,
+            statePaynment="completed",
+            datePayment=datetime(2019, 4, 18)),
+        Payment(idPayment=3,
+            amountPayment=1337,
+            statePaynment="completed",
+            datePayment=datetime(2016, 1, 7)),
+        Payment(idPayment=4,
+            amountPayment=42,
+            statePaynment="completed",
+            datePayment=datetime(2012, 9, 4)),
+        Payment(idPayment=5,
+            amountPayment=666,
+            statePaynment="completed",
+            datePayment=datetime(2010, 10, 10)),
+    ]
