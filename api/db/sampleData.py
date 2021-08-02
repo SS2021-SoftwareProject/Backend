@@ -8,7 +8,7 @@ def add_sample_data():
     :return: -
     """
 
-    #fictional milestones, sample data
+    # fictional milestones, sample data
 
     milestones: List[Milestone] = [
         Milestone(idMilestone=1,
@@ -33,3 +33,27 @@ def add_sample_data():
             descriptionMilestone="Visually pleasing GUI to provide access to the API instead of commands"),
     ]
 
+    # fictional images, sample data. fileImage binary points nowhere. Change that if necessary
+
+    images: List[Image] = [
+        Image(idImage=1,
+            fileImage=bin(42),
+            descriptionImage="The answer to everything, probably",
+            formatImage="jpg"),
+        Image(idImage=2,
+            fileImage=bin(69),
+            descriptionImage="A nice image",
+            formatImage="jpg"),
+        Image(idImage=3,
+            fileImage=bin(420),
+            descriptionImage="Another nice image",
+            formatImage="png"),
+        Image(idImage=4,
+            fileImage=bin(1337),
+            descriptionImage="The best image",
+            formatImage="png"),
+        Image(idImage=5,
+            fileImage=bin(666),
+            descriptionImage="Don't use this image",
+            formatImage="jpg"),
+    ]
