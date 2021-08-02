@@ -164,3 +164,29 @@ def add_sample_data():
     milestones[2].project = projects[1]
     milestones[3].project = projects[1]
     milestones[4].project = projects[2]
+    
+    # foreign key assignments
+
+    milestones[0].idImage = projects[0].idImage
+    milestones[1].idImage = projects[1].idImage
+    milestones[2].idImage = projects[2].idImage
+    milestones[3].idImage = projects[3].idImage
+    milestones[4].idImage = projects[4].idImage
+
+    milestones[0].idProject = projects[0].idProject
+    milestones[1].idProject = projects[0].idProject
+    milestones[2].idProject = projects[1].idProject
+    milestones[3].idProject = projects[1].idProject
+    milestones[4].idProject = projects[2].idProject
+
+    payments[0].idUser = user[0].idUser
+    payments[1].idUser = user[1].idUser
+    payments[2].idUser = user[2].idUser
+    payments[3].idUser = user[3].idUser
+    payments[4].idUser = user[4].idUser
+
+    payments[0].idProject = projects[0].idProject
+    payments[1].idProject = projects[1].idProject
+    payments[2].idProject = projects[2].idProject
+    payments[3].idProject = projects[3].idProject
+    payments[4].idProject = projects[4].idProject
