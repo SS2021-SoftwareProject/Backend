@@ -64,37 +64,37 @@ def user_by_id_get(session, id):
     return jsonify(json_data), 200
 
 
-@BP.route('', methods=['POST'])
-@db_session_dec
-def user_post(session):
-    firstname = request.headers.get('firstname', default=None)
-    lastname = request.headers.get('lastname', default=None)
-    email = request.headers.get('email', default=None)
-    password_Token = request.headers.get('passwordToken', default=None)
-
-    if None in [firstname, lastname, email, password_Token]:
+@BP.route('/signup', methods=['POST'])
+def signup_post(session):
+    email = request.form.get('email')
+    password = request.form.get('password')
+    firstname = request.form.get('firstname')
+    lastname = request.form.get('lastname')
+    user = User.query.filter_by(emailUser=email).first()
+    if None in [firstname, lastname, email, password]:
         return jsonify({'error': 'Missing parameter'}), 400
 
-    if "" in [firstname, lastname, email, password_Token]:
+    if "" in [firstname, lastname, email, password]:
         return jsonify({'error': "Empty parameter"}), 400
 
     if re.match("^[a-zA-ZäÄöÖüÜ ,.'-]+$", firstname) is None or re.match("^[a-zA-ZäÄöÖüÜ ,.'-]+$", lastname) is None:
         return jsonify({'error': 'Firstname and/or lastname must contain only alphanumeric characters'}), 400
 
-    """acc = WEB3.eth.account.create()"""
+    if user:
+        return jsonify({'error': 'Invalid credentials, user already exists'}), 400
+    new_user = User(emailUser = email, firstNameUser = firstname, lastNameUser = lastname, passwordtokenUser = password)
+    session.add(new_user)
+    session.commit
 
-    try:
-        if password_Token != session.query(User).filter(User.passwordtokenUser):
-            return jsonify({'error': 'Invalid token.'}), 400
-        
-        user_inst = User(firstNameUser=firstname,
-                         lastNameUser=lastname,
-                         emailUser=email)
-                         #publickeyUser=acc.address,
-                         #privatkeyUser=acc.key)
-    except (KeyError, ValueError, DecodeError):  # jwt decode errors
-        return jsonify({'status': 'Invalid JWT'}), 400
+    return jsonify({'success': 'User has been created'}), 200
 
-    session.add(user_inst)
-    session.commit()
-    return jsonify({'status': 'User POST erfolgreich'}), 201
+
+@BP.route('/login', methods=['POST'])
+def login_post(session):
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    user = User.query.filter_by(emailUser = email).first()
+    if not user or not user.passwordtokenUser == password:
+        return jsonify({'error': 'Invalid credentials'}), 403
+    return jsonify({'success': 'User logged in'}), 200
