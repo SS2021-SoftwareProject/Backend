@@ -138,6 +138,7 @@ def login_post(session):
 
     results = session.query(User)
     user = results.filter(User.emailUser == email).first()
+
     if not user or not user.passwordtokenUser == password:
         return jsonify({'error': 'Invalid credentials'}), 403
     return jsonify({'success': 'User logged in'}), 200
