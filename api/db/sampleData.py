@@ -134,3 +134,23 @@ def add_sample_data():
             statePaynment="completed",
             datePayment=datetime(2010, 10, 10)),
     ]
+
+    # fictional ngo, sample data
+
+    ngos: List[NGO] = [
+        NGO(idNGO=1,
+            nameNGO="Example Name",
+            emailNGO="example.name@example.com"),
+        NGO(idNGO=2,
+            nameNGO="Trusted Orginasation",
+            emailNGO="trusted.organisation@example.com"),
+        NGO(idNGO=3,
+            nameNGO="Not A Scam",
+            emailNGO="not.a.scam@example.com"),
+        NGO(idNGO=4,
+            nameNGO="Your standard NGO",
+            emailNGO="your.standard.ngo@example.com"),
+        NGO(idNGO=5,
+            nameNGO="Ran out of ideas",
+            emailNGO="ran.out.of.ideas@example.com"),
+    ]
