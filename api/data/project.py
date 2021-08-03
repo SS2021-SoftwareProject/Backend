@@ -33,7 +33,6 @@ def projects_get(session):
     image = ""
 
     json_data = []
-
     for result in results:
 
         try:

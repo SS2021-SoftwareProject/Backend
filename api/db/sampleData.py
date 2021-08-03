@@ -1,7 +1,7 @@
 # This file is not a working function or executable data, just the structure for some random values.
 
 from datetime import datetime
-from db.dbStructure import Image, NGO, Problem, Project, Solution, Summary
+from db.dbStructure import Image, NGO, Problem, Project, Solution, Summary, Milestone, User, Payment
 from typing import List
 
 def add_sample_data():
@@ -40,23 +40,23 @@ def add_sample_data():
 
     images: List[Image] = [
         Image(idImage=1,
-            fileImage="/images/image1.jpg",
+            fileImage="https://i.pinimg.com/originals/48/d4/52/48d452d6a198414702768488832801fe.jpg",
             descriptionImage="The answer to everything, probably",
             formatImage="jpg"),
         Image(idImage=2,
-            fileImage="/images/image2.jpg",
+            fileImage="https://i.pinimg.com/originals/36/ae/42/36ae42ce13358d130b7fb12eecb2155c.jpg",
             descriptionImage="A nice image",
             formatImage="jpg"),
         Image(idImage=3,
-            fileImage="/images/image3.jpg",
+            fileImage="https://www.sternsinger.de/fileadmin/_processed_/a/a/csm_Suedsudan_DorfNyanbath_Harms_102_web_2f554d068a.jpg",
             descriptionImage="Another nice image",
-            formatImage="png"),
+            formatImage="jpg"),
         Image(idImage=4,
-            fileImage="/images/image4.jpg",
+            fileImage="https://unicef.at/fileadmin/_processed_/b/9/csm_UNICEF-kind-leerer-teller-UN0345138_d78780f7b6.jpg",
             descriptionImage="The best image",
-            formatImage="png"),
+            formatImage="jpg"),
         Image(idImage=5,
-            fileImage="/images/image5.jpg",
+            fileImage="https://www.malteser-international.org/fileadmin/_processed_/8/4/csm_Hungerndes-Kind-bekommt-Zusatznahrung_f7e0c23dc3.jpg",
             descriptionImage="Don't use this image",
             formatImage="jpg"),
     ]

@@ -18,9 +18,9 @@ def meilenstein_get(session):
     for result in results:
         json_data.append({
             'id':result.idMilestone,
-            'name':result.nameMilestone,
-            'amount':result.amountMilestone,
-            'description':result.descriptionMilestone,
+            'titel':result.nameMilestone,
+            'betrag':result.amountMilestone,
+            'beschreibung':result.descriptionMilestone,
             'idImage':result.idImage,
             'idProject':result.idProject
         })
@@ -50,9 +50,9 @@ def meilenstein_by_id_get(session, id):
 
     json_data = {
         'id':results.idMilestone,
-        'name':results.nameMilestone,
-        'amount':results.amountMilestone,
-        'description':results.descriptionMilestone,
+        'titel':results.nameMilestone,
+        'betrag':results.amountMilestone,
+        'beschreibung':results.descriptionMilestone,
         'idImage':results.idImage,
         'idProject':results.idProject
     }
