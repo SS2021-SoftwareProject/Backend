@@ -3,7 +3,7 @@ import requests
 
 url = "http://127.0.0.1:5000/api/image"
 obj = {
-    'fileImage':"https://google.com",
+    'fileImage':"https://www.unicef.de/blob/221778/3c89d03bff7e4573ed1e8ab4fbd6d597/drc-mangelernaehrung-plumpy-nut-uni232071-data.jpg",
     'descriptionImage':"Eine Beschreibung",
     'formatImage':"image/jpg"
 }
