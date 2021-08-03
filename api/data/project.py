@@ -229,7 +229,7 @@ def project_by_id_get(session, id):
 @db_session_dec
 def projekt_post(session):
     name = request.headers.get('nameProject', default=None)
-    ngo = request.headers.get('idImage', default=None)
+    ngo = request.headers.get('idNGO', default=None)
     image = request.headers.get('idImage', default=None)
     status = request.headers.get('statusProject', default=None)
     actualSum = request.headers.get('amountProject', default=None)
@@ -250,6 +250,7 @@ def projekt_post(session):
     """acc = WEB3.eth.account.create()"""
     try:
         projekt_inst = Project(nameProject=name,
+                            idImage = image,
                             statusProject = status,
                             amountProject = actualSum,
                             shouldAmountProject = shouldSum,
@@ -258,8 +259,7 @@ def projekt_post(session):
                             idSolution = solID,
                             idSummary = sumID,
                             idProblem = probID,
-                            idNGO = ngo,
-                            idImage = image
+                            idNGO = ngo
                            )
     except (KeyError, ValueError, DecodeError):  # jwt decode errors
         return jsonify({'status': 'Invalid JWT'}), 400

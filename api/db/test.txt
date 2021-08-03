@@ -1,13 +1,55 @@
 import requests
 
+
+url = "http://127.0.0.1:5000/api/image"
+obj = {
+    'fileImage':"https://google.com",
+    'descriptionImage':"Eine Beschreibung",
+    'formatImage':"image/jpg"
+}
+x = requests.post(url,headers = obj)
+print(x.text)
+
+
+url = "http://127.0.0.1:5000/api/description/summary"
+obj = {
+    'idImage':"1",
+    'descriptionSummary':"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum."
+}
+x = requests.post(url,headers = obj)
+print(x.text)
+
+
+url = "http://127.0.0.1:5000/api/description/solution"
+obj = {
+    'idImage':"1",
+    'descriptionSolution':"dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum."
+}
+x = requests.post(url,headers = obj)
+print(x.text)
+
+
+url = "http://127.0.0.1:5000/api/description/problem"
+obj = {
+    'idImage':"1",
+    'descriptionproblem':"ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum."
+}
+x = requests.post(url,headers = obj)
+print(x.text)
+
+
 url = "http://127.0.0.1:5000/api/projects"
 obj = {
     'nameProject':"TestProjekt",
-    'statusProject':"0",
+    'statusProject':'100.0',
     'amountProject':"1222.0",
     'shouldAmountProject':"4984844.0",
     'paymentInformationProject':"kein Plan",
-    'pageProject':"https://google.com"
+    'pageProject':"https://google.com",
+    'idImage':"1",
+    'idSolution':"1",
+    'idProblem':"1",
+    'idSummary':"1"
 }
 x = requests.post(url,headers = obj)
 print(x.text)
@@ -20,7 +62,11 @@ obj = {
     'amountProject':"1222.0",
     'shouldAmountProject':"8888.0",
     'paymentInformationProject':"Immernoch kein Plan",
-    'pageProject':"https://google.com"
+    'pageProject':"https://google.com",
+    'idImage':"1",
+    'idSolution':"1",
+    'idProblem':"1",
+    'idSummary':"1"
 }
 x = requests.post(url,headers = obj)
 print(x.text)

@@ -38,7 +38,7 @@ class Milestone(BASE):
 class Image(BASE):
     __tablename__ = "Image"
     idImage = Column(Integer,primary_key=True,autoincrement=True)
-    fileImage = Column(BINARY)
+    fileImage = Column(VARCHAR(256))
     descriptionImage = Column(TEXT)
     formatImage = Column(VARCHAR(256))
 

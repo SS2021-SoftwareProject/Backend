@@ -4,7 +4,9 @@ from . import milestone
 from . import user
 from . import payment
 from . import ngo
+from . import description
 from . import annotations
+
 
 BLUEPRINTS = [
     project.BP,
@@ -13,4 +15,5 @@ BLUEPRINTS = [
     user.BP,
     payment.BP,
     ngo.BP,
+    description.BP,
 ]

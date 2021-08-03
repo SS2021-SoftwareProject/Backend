@@ -188,7 +188,7 @@ def solution_post(session):
     return jsonify({'status': 'Solution POST erfogreich'}), 201
 
 
-@BP.route('/Problem', methods=['POST'])
+@BP.route('/problem', methods=['POST'])
 @db_session_dec
 def problem_post(session):
     image = request.headers.get('idImage', default=None)
