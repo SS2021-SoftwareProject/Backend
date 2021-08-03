@@ -40,23 +40,23 @@ def add_sample_data():
 
     images: List[Image] = [
         Image(idImage=1,
-            fileImage=bin(42),
+            fileImage="/images/image1.jpg",
             descriptionImage="The answer to everything, probably",
             formatImage="jpg"),
         Image(idImage=2,
-            fileImage=bin(69),
+            fileImage="/images/image2.jpg",
             descriptionImage="A nice image",
             formatImage="jpg"),
         Image(idImage=3,
-            fileImage=bin(420),
+            fileImage="/images/image3.jpg",
             descriptionImage="Another nice image",
             formatImage="png"),
         Image(idImage=4,
-            fileImage=bin(1337),
+            fileImage="/images/image4.jpg",
             descriptionImage="The best image",
             formatImage="png"),
         Image(idImage=5,
-            fileImage=bin(666),
+            fileImage="/images/image5.jpg",
             descriptionImage="Don't use this image",
             formatImage="jpg"),
     ]
@@ -225,6 +225,7 @@ def add_sample_data():
                 amountProject=500,
                 shouldAmountProject= 10000,
                 paymentInformationProject="some Payment informations ",
+                shortDescription = "Kurzer Text",
                 pageProject= "www.Project1.com"
                 ),
 
@@ -234,6 +235,7 @@ def add_sample_data():
                 amountProject=5000,
                 shouldAmountProject= 5000,
                 paymentInformationProject="some Payment informations ",
+                shortDescription = "Kurzer Text2",
                 pageProject= "www.Project2.com"
                 ),
 
@@ -243,6 +245,7 @@ def add_sample_data():
                 amountProject=2500,
                 shouldAmountProject= 3000,
                 paymentInformationProject="some Payment informations ",
+                shortDescription = "Kurzer Text3",
                 pageProject= "www.Project3.com"
                 )
 

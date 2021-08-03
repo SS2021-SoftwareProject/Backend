@@ -23,21 +23,63 @@ BP = Blueprint('projects', __name__, url_prefix='/api/projects')
 @db_session_dec
 def projects_get(session):
     results = session.query(Project)
+    sumRes = session.query(Summary)
+    imageRes = session.query(Image)
+    probRes = session.query(Problem)
+    solRes = session.query(Solution)
+    sumImage = ""
+    probImage = ""
+    solImage = ""
+    image = ""
 
     json_data = []
 
     for result in results:
+
+        try:
+            if result.idImage:
+                image = imageRes.filter(Image.idImage == result.idImage).one()
+            else:
+                return jsonify({'error':'missing argument in Image'}), 400
+        except NoResultFound:
+            return jsonify({'error': 'Image not found'}), 404
+
+        try:
+            if result.idSolution:
+                solImage = solRes.filter(Solution.idSolution == result.idSolution).one()
+            else:
+                return jsonify({'error':'missing argument in Image'}), 400
+        except NoResultFound:
+            return jsonify({'error': 'Image not found'}), 404
+        
+        try:
+            if result.idSolution:
+                sumImage = sumRes.filter(Summary.idSummary == result.idSummary).one()
+            else:
+                return jsonify({'error':'missing argument in Image'}), 400
+        except NoResultFound:
+            return jsonify({'error': 'Image not found'}), 404
+
+        try:
+            if result.idSolution:
+                probImage = probRes.filter(Problem.idProblem == result.idProblem).one()
+            else:
+                return jsonify({'error':'missing argument in Image'}), 400
+        except NoResultFound:
+            return jsonify({'error': 'Image not found'}), 404
+
         json_data.append({
             'id':result.idProject,
             'idNGO':result.idNGO,
-            'idImage':result.idImage,
-            'descSolution':result.idSolution,
-            'descSummary':result.idSummary,
-            'descProblem':result.idProblem,
+            'bild':image.fileImage,
+            'beschreibung':result.shortDescription,
+            'descSolution':solImage.descriptionSolution,
+            'descSummary':sumImage.descriptionSummary,
+            'descProblem':probImage.descriptionProblem,
             'name':result.nameProject,
             'status':result.statusProject,
-            'amount':result.amountProject,
-            'shouldAmount':result.shouldAmountProject,
+            'istBetrag':result.amountProject,
+            'sollBetrag':result.shouldAmountProject,
             'paymentInformation':result.paymentInformationProject,
             'page':result.pageProject
         })
@@ -49,7 +91,7 @@ def projects_get(session):
 def project_by_id_get(session, id):
  
     id_project = id
-
+    imageRes = session.query(Image)
     try:
         if id_project:
             int(id_project)
@@ -66,17 +108,27 @@ def project_by_id_get(session, id):
     except NoResultFound:
         return jsonify({'error': 'Projekt not found'}), 404
 
+    try:
+        if results.idImage:
+            imageRes = imageRes.filter(Image.idImage == results.idImage).one()
+        else:
+            return jsonify({'error':'missing argument'}), 400
+    except NoResultFound:
+        return jsonify({'error': 'Projekt not found'}), 404
+
+
     json_data = {
         'id':results.idProject,
         'idNGO':results.idNGO,
-        'idImage':results.idImage,
+        'bild':imageRes.fileImage,
+        'beschreibung':results.shortDescription,
         'descSolution':results.idSolution,
         'descSummary':results.idSummary,
         'descProblem':results.idProblem,
         'name':results.nameProject,
         'status':results.statusProject,
-        'amount':results.amountProject,
-        'shouldAmount':results.shouldAmountProject,
+        'istBetrag':results.amountProject,
+        'sollBetrag':results.shouldAmountProject,
         'paymentInformation':results.paymentInformationProject,
         'page':results.pageProject
     }
@@ -155,11 +207,8 @@ def description_by_project_id_get(session, id):
         'problems':probRes.descriptionProblem,
         'solution':solRes.descriptionSolution,
         'imageSum':sumImage.fileImage,
-        'imageSumFormat':sumImage.formatImage,
         'imageProb':probImage.fileImage,
-        'imageProbFormat':probImage.formatImage,
-        'imageSol':solImage.fileImage,
-        'imageSolFormat':solImage.formatImage
+        'imageSol':solImage.fileImage
     }
 
     return jsonify(json_data), 200
@@ -239,9 +288,9 @@ def projekt_post(session):
     sumID = request.headers.get('idSummary', default=None)
     probID = request.headers.get('idProblem', default=None)
     solID = request.headers.get('idSolution', default=None)
+    shortDesc = request.headers.get('shortDescription', default=None)
 
-
-    if None in [name, status, actualSum, shouldSum, paymentInformation, page]:
+    if None in [name, status, actualSum, shouldSum, paymentInformation, shortDesc ,page]:
         return jsonify({'error': 'Missing parameter'}), 400
 
     if "" in [name, status, actualSum, shouldSum, paymentInformation, page]:
@@ -255,6 +304,7 @@ def projekt_post(session):
                             amountProject = actualSum,
                             shouldAmountProject = shouldSum,
                             paymentInformationProject = paymentInformation,
+                            shortDescription = shortDesc,
                             pageProject = page,
                             idSolution = solID,
                             idSummary = sumID,

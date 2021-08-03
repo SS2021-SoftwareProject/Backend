@@ -10,6 +10,7 @@ class Project(BASE):
     idProject = Column(Integer,primary_key=True,autoincrement=True)
     idNGO = Column(Integer,ForeignKey("NGO.idNGO"))
     idImage = Column(Integer,ForeignKey("Image.idImage"))
+    shortDescription = Column(TEXT)
     idSolution = Column(Integer,ForeignKey("Solution.idSolution"))
     idSummary = Column(Integer,ForeignKey("Summary.idSummary"))
     idProblem = Column(Integer,ForeignKey("Problem.idProblem"))
