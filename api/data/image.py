@@ -66,7 +66,7 @@ def image_post(session):
 
     if "" in [picture, format]:
         return jsonify({'error': "Empty parameter"}), 400  #beide If-Anweisungen sind noch Fehlerhaft setzte mich nach refactor dran
-        
+    
     try:        
         bild_inst = Image(fileImage=picture,
                          descriptionImage=description,
