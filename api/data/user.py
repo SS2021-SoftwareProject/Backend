@@ -9,6 +9,8 @@ from api.db.dbStructure import User
 from api.db.dbStructure import Payment
 from .annotations import db_session_dec,auth_user
 from sqlalchemy.orm.exc import NoResultFound
+from flask_cors import CORS, cross_origin
+
 
 app = Flask(__name__)
 cors = CORS(app)
