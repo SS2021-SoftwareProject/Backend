@@ -38,6 +38,12 @@ pip3 install -r requirements.txt
 ```
 ausführen
 
+Danach diese beiden exporte ausführen:
+```
+export FLASK_APP=api
+export FLASK_ENV=development
+```
+
 
 **Wallet Zugang**
   1. Empfolenes Wallet --> MetaMask (Chrome Erweiterung --> https://metamask.io/)

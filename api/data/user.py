@@ -127,7 +127,17 @@ def signup_post(session):
     new_user = User(emailUser = email, firstNameUser = firstname, lastNameUser = lastname, passwordtokenUser = password)
     session.add(new_user)
     session.commit()
-    return jsonify({'success': 'User has been created'}), 200
+    new_userJson = {
+        'id':new_user.idUser,
+        'firstname':new_user.firstNameUser,
+        'lastname':new_user.lastNameUser,
+        'email':new_user.emailUser,
+        'PasswordToken':new_user.passwordtokenUser,
+        'Publickey':new_user.publickeyUser,
+        'Privatekey':new_user.privatkeyUser,
+        'RegisterDate':new_user.registryAtUser
+    }
+    return jsonify({'success': 'User logged in', 'user' : new_userJson}), 200
 
 
 @BP.route('/login', methods=['POST'])
@@ -141,5 +151,14 @@ def login_post(session):
 
     if not user or not user.passwordtokenUser == password:
         return jsonify({'error': 'Invalid credentials'}), 403
-    return jsonify({'success': 'User logged in'}), 200
-#test
+    userJson = {
+        'id':user.idUser,
+        'firstname':user.firstNameUser,
+        'lastname':user.lastNameUser,
+        'email':user.emailUser,
+        'PasswordToken':user.passwordtokenUser,
+        'Publickey':user.publickeyUser,
+        'Privatekey':user.privatkeyUser,
+        'RegisterDate':user.registryAtUser
+    }
+    return jsonify({'success': 'User logged in', 'user' : userJson}), 200
