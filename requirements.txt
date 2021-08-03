@@ -2,7 +2,7 @@ sqlalchemy
 validators
 flask
 flask_cors
-flask-login
+flask_login
 geopy
 jwt
 mariadb
