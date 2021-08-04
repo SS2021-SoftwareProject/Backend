@@ -21,6 +21,7 @@ def payment_get(session):
         json_data.append({
             'id':result.idPayment,
             'idUser':result.idUser,
+            'idProject':result.idProject,
             'amount':result.amountPayment,
             'status':result.statePayment,
             'datetime':result.datePayment,
@@ -55,6 +56,7 @@ def zahlung_by_id_get(session, id):
 
     json_data = {
         'id':results.idPayment,
+        'idProject':results.idProject,
         'idUser':results.idUser,
         'amount':results.amountPayment,
         'status':results.statePayment,
@@ -62,25 +64,6 @@ def zahlung_by_id_get(session, id):
     }
         
     return jsonify(json_data), 200
-
-@BP.route('', methods=['PUT'])
-def zahlung_put(zahlung_inst):
-    amount = request.headers.get('amountPayment', default=None)
-    status = request.headers.get('statePayment', default=None)
-    date = request.headers.get('datePayment', default=datetime.now())
-
-
-    if None in [amount, status, date]:
-        return jsonify({'error': 'Missing parameter'}), 400
-
-    if "" in [amount, status, date]:
-        return jsonify({'error': 'Empty parameter'}), 400 #IF-Anweisung Fehlerhaft wird nach Refactor geändert
-
-    zahlung_inst.amountPayment = amount
-    zahlung_inst.statePayment = status
-    zahlung_inst.datePayment = date
-
-    return jsonify({'status': 'changed'}), 200
 
 
 @BP.route('', methods=['POST'])
@@ -112,3 +95,51 @@ def zahlung_post(session):
     session.commit()
     return jsonify({'status': 'Payment POST erfolgreich'}), 201
     
+@BP.route('/<id>', methods=['PUT'])
+@db_session_dec
+def payment_put(session, id):
+    payment_id = id
+
+    try:
+        if payment_id:
+            int(payment_id)
+    except ValueError:
+        return jsonify({'error': 'bad argument'}), 400
+    results = session.query(Payment)
+
+    
+    try:
+        old = results.filter(Payment.idPayment == payment_id).one()
+    except NoResultFound:
+        return jsonify({'error': 'Payment not found'}), 404
+    
+    iduser   = request.headers.get('idUser', default=old.idUser)
+    idproject = request.headers.get('idProject', default=old.idProject )
+    amountpayment= request.headers.get('amountPayment', default=old.amountPayment)
+    statepayment= request.headers.get('statePayment', default=old.statePayment)
+    datepayment= request.headers.get('datePayment', default=old.datePayment)
+    
+    
+    print(results)
+    
+
+    try:
+        if payment_id:
+            results.filter(Payment.idPayment == payment_id).one()
+        else:
+            return jsonify({'error':'missing argument'}), 400
+    except NoResultFound:
+        return jsonify({'error': 'Payment not found'}), 404
+    if None in [iduser,idproject, amountpayment,statepayment ,datepayment ]:
+        return jsonify({'error': 'Missing parameter'}), 400
+
+    if "" in [iduser,idproject, amountpayment,statepayment ,datepayment]:
+        return jsonify({'error': 'Empty parameter'}), 400
+    
+    try:
+        result = results.filter(Payment.idPayment == payment_id).update({'idUser' : iduser , 'idProject' : idproject, 'amountPayment' : amountpayment , 'statePayment' : statepayment, 'datePayment' : datepayment })
+    except Exception as msg:
+        return jsonify({'error': repr(msg)}), 400
+    
+    session.commit()
+    return jsonify({'status': 'changed'}), 200
