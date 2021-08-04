@@ -1,9 +1,18 @@
 import requests
+'''
+
+url = "http://127.0.0.1:5000/api/ngo"
+obj = {
+    'nameNGO':"Spendenhaus",
+    'emailNGO':"ngo@ngo.com"
+    }
+x = requests.post(url,headers = obj)
+print(x.text)
 
 
 url = "http://127.0.0.1:5000/api/image"
 obj = {
-    'fileImage':"https://google.com",
+    'fileImage':"https://www.unicef.de/blob/221778/3c89d03bff7e4573ed1e8ab4fbd6d597/drc-mangelernaehrung-plumpy-nut-uni232071-data.jpg",
     'descriptionImage':"Eine Beschreibung",
     'formatImage':"image/jpg"
 }
@@ -44,6 +53,7 @@ obj = {
     'statusProject':'100.0',
     'amountProject':"1222.0",
     'shouldAmountProject':"4984844.0",
+    'shortDescription': "teststestt",
     'paymentInformationProject':"kein Plan",
     'pageProject':"https://google.com",
     'idImage':"1",
@@ -61,6 +71,7 @@ obj = {
     'statusProject':"0",
     'amountProject':"1222.0",
     'shouldAmountProject':"8888.0",
+    'shortDescription': "teststestt",
     'paymentInformationProject':"Immernoch kein Plan",
     'pageProject':"https://google.com",
     'idImage':"1",
@@ -133,4 +144,111 @@ obj = {
     "statePayment":"1"
 }
 x = requests.post(url,headers = obj)
+print(x.text)
+
+
+url = "http://127.0.0.1:5000/api/ngo"
+obj = {
+    'nameNGO':"Fussballspenden",
+    'emailNGO':"ngo@irgendwasmitFussball.com"
+    }
+x = requests.post(url,headers = obj)
+print(x.text)
+
+
+
+
+url = "http://127.0.0.1:5000/api/description/summary/1"
+obj = {
+    "descriptionSummary":"Funktioniert Summary es?",
+    'idImage': "1"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+
+url = "http://127.0.0.1:5000/api/description/solution/1"
+obj = {
+    "descriptionSolution":"Funktioniert Solution es?",
+    'idImage': "1"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+
+url = "http://127.0.0.1:5000/api/description/problem/1"
+obj = {
+    "descriptionProblem":"Funktioniert Problem es?",
+    'idImage': "1"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+'''
+
+url = "http://127.0.0.1:5000/api/projects/1"
+obj = {
+    'idSolution':"1",
+    'idProblem':"1",
+    'idSummary':"1"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+url = "http://127.0.0.1:5000/api/projects/2"
+obj = {
+    'idSolution':"2",
+    'idProblem':"2",
+    'idSummary':"2"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+url = "http://127.0.0.1:5000/api/projects/3"
+obj = {
+    'idSolution':"3",
+    'idProblem':"3",
+    'idSummary':"3"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+url = "http://127.0.0.1:5000/api/payment/1"
+obj = {
+    'idUser':"1",
+    'idProject':"1"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+
+url = "http://127.0.0.1:5000/api/payment/2"
+obj = {
+    'idUser':"1",
+    'idProject':"3"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+url = "http://127.0.0.1:5000/api/payment/3"
+obj = {
+    'idUser':"4",
+    'idProject':"1"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+url = "http://127.0.0.1:5000/api/payment/4"
+obj = {
+    'idUser':"2",
+    'idProject':"2"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+url = "http://127.0.0.1:5000/api/payment/5"
+obj = {
+    'idUser':"1",
+    'idProject':"3"
+}
+x = requests.put(url,headers=obj)
 print(x.text)

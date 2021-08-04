@@ -2,13 +2,18 @@
 
 import re
 import validators
+from flask.app import Flask
 from flask import Blueprint, request, jsonify
 from sqlalchemy import func
 from api.db.dbStructure import User
 from api.db.dbStructure import Payment
 from .annotations import db_session_dec,auth_user
 from sqlalchemy.orm.exc import NoResultFound
+from flask_cors import CORS, cross_origin
 
+
+app = Flask(__name__)
+cors = CORS(app)
 #from api.contracts.web3 import WEB3
 
 BP = Blueprint('user', __name__, url_prefix='/api/users')
@@ -106,6 +111,7 @@ def contributions_by_user_id_get(session, id):
 
 @BP.route('/signup', methods=['POST'])
 @db_session_dec
+@cross_origin()
 def signup_post(session):
     email = request.headers.get('email')
     password = request.headers.get('password')
@@ -137,11 +143,12 @@ def signup_post(session):
         'Privatekey':new_user.privatkeyUser,
         'RegisterDate':new_user.registryAtUser
     }
-    return jsonify({'success': 'User logged in', 'user' : new_userJson}), 200
+    return jsonify({'success': 'User registered', 'user' : new_userJson}), 200
 
 
 @BP.route('/login', methods=['POST'])
 @db_session_dec
+@cross_origin()
 def login_post(session):
     email = request.headers.get('email')
     password = request.headers.get('password')

@@ -18,9 +18,9 @@ def meilenstein_get(session):
     for result in results:
         json_data.append({
             'id':result.idMilestone,
-            'name':result.nameMilestone,
-            'amount':result.amountMilestone,
-            'description':result.descriptionMilestone,
+            'titel':result.nameMilestone,
+            'betrag':result.amountMilestone,
+            'beschreibung':result.descriptionMilestone,
             'idImage':result.idImage,
             'idProject':result.idProject
         })
@@ -50,9 +50,9 @@ def meilenstein_by_id_get(session, id):
 
     json_data = {
         'id':results.idMilestone,
-        'name':results.nameMilestone,
-        'amount':results.amountMilestone,
-        'description':results.descriptionMilestone,
+        'titel':results.nameMilestone,
+        'betrag':results.amountMilestone,
+        'beschreibung':results.descriptionMilestone,
         'idImage':results.idImage,
         'idProject':results.idProject
     }
@@ -151,3 +151,51 @@ def meilenstein_post(session):
     session.commit()
     return jsonify({'status': 'Milestone registered'}), 201
     
+@BP.route('/<id>', methods=['PUT'])
+@db_session_dec
+def milestone_put(session, id):
+    milestone_id = id
+
+    try:
+        if milestone_id:
+            int(milestone_id)
+    except ValueError:
+        return jsonify({'error': 'bad argument'}), 400
+    results = session.query(Milestone)
+
+    
+    try:
+        old = results.filter(Milestone.idMilestone == milestone_id).one()
+    except NoResultFound:
+        return jsonify({'error': 'Milestone not found'}), 404
+    
+    idimage = request.headers.get('idImage', default=old.idImage)
+    idproject = request.headers.get('idProject', default=old.idProject )
+    namemilestone= request.headers.get('nameMilestone', default=old.nameMilestone)
+    amountmilestone= request.headers.get('amountMilestone', default=old.amountMilestone)
+    descriptionmilestone = request.headers.get('descriptionMilestone', default=old.descriptionMilestone)
+    
+    
+    print(results)
+    
+
+    try:
+        if milestone_id:
+            results.filter(Milestone.idMilestone == milestone_id).one()
+        else:
+            return jsonify({'error':'missing argument'}), 400
+    except NoResultFound:
+        return jsonify({'error': 'Milestone not found'}), 404
+    if None in [idimage, idproject, namemilestone, amountmilestone, descriptionmilestone]:
+        return jsonify({'error': 'Missing parameter'}), 400
+
+    if "" in [idimage,idproject,namemilestone ,amountmilestone, descriptionmilestone]:
+        return jsonify({'error': 'Empty parameter'}), 400
+    
+    try:
+        result = results.filter(Milestone.idMilestone == milestone_id).update({'idImage' : idimage , 'idProject' : idproject, 'nameMilestone' : namemilestone, 'amountMilestone' : amountmilestone , 'descriptionMilestone' : descriptionmilestone})
+    except Exception as msg:
+        return jsonify({'error': repr(msg)}), 400
+    
+    session.commit()
+    return jsonify({'status': 'changed'}), 200
