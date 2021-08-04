@@ -69,19 +69,21 @@ def zahlung_by_id_get(session, id):
 @BP.route('', methods=['POST'])
 @db_session_dec
 def zahlung_post(session):
-    user = request.headers.get('idUser',default=None)
-    project = request.headers.get('idProject', default=None)
-    amount = request.headers.get('amountPayment', default=None)
-    status = request.headers.get('statePayment', default=None)
-    date = request.headers.get('datePayment', default=datetime.now())
-    
+    user = request.args.get('idUser', default=None)
+    project = request.args.get('idProject', default=None)
+    amount = request.args.get('amount', default=None)
+    status = request.args.get('status', default="complete")
+    date = request.args.get('date', default=datetime.now())
 
-    if None in [amount, status, date]:
+    # ----------------------------------------------------------------------------------------------------
+    # Append to Blockchain
+    # ----------------------------------------------------------------------------------------------------
+
+    if None in [user, project, amount]:
         return jsonify({'error': 'Missing parameter'}), 400
 
-    if "" in [amount, status, date]:
+    if "" in [user, project, amount]:
         return jsonify({'error': "Empty parameter"}), 400 #IF-Anweisung Fehlerhaft wird nach Refactor geändert
-
     try:        
         zahlung_inst = Payment(amountPayment=amount,
                          statePayment=status,
