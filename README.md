@@ -1,4 +1,8 @@
 # Backend
+# Description
+
+Software repository for artefacts referring towards the frontend part of our project "Charitable".
+
 # Team
 
 Name | Github | Role
