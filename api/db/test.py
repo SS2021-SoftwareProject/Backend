@@ -1,5 +1,5 @@
 import requests
-
+'''
 
 url = "http://127.0.0.1:5000/api/ngo"
 obj = {
@@ -157,7 +157,7 @@ print(x.text)
 
 
 
-'''
+
 url = "http://127.0.0.1:5000/api/description/summary/1"
 obj = {
     "descriptionSummary":"Funktioniert Summary es?",
@@ -184,3 +184,71 @@ obj = {
 x = requests.put(url,headers=obj)
 print(x.text)
 '''
+
+url = "http://127.0.0.1:5000/api/projects/1"
+obj = {
+    'idSolution':"1",
+    'idProblem':"1",
+    'idSummary':"1"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+url = "http://127.0.0.1:5000/api/projects/2"
+obj = {
+    'idSolution':"2",
+    'idProblem':"2",
+    'idSummary':"2"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+url = "http://127.0.0.1:5000/api/projects/3"
+obj = {
+    'idSolution':"3",
+    'idProblem':"3",
+    'idSummary':"3"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+url = "http://127.0.0.1:5000/api/payment/1"
+obj = {
+    'idUser':"1",
+    'idProject':"1"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+
+url = "http://127.0.0.1:5000/api/payment/2"
+obj = {
+    'idUser':"1",
+    'idProject':"3"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+url = "http://127.0.0.1:5000/api/payment/3"
+obj = {
+    'idUser':"4",
+    'idProject':"1"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+url = "http://127.0.0.1:5000/api/payment/4"
+obj = {
+    'idUser':"2",
+    'idProject':"2"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+url = "http://127.0.0.1:5000/api/payment/5"
+obj = {
+    'idUser':"1",
+    'idProject':"3"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
