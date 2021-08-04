@@ -212,6 +212,99 @@ obj = {
 x = requests.put(url,headers=obj)
 print(x.text)
 
+url = "http://127.0.0.1:5000/api/projects/4"
+obj = {
+    'idSolution':"3",
+    'idProblem':"3",
+    'idSummary':"3"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+
+url = "http://127.0.0.1:5000/api/projects/5"
+obj = {
+    'idSolution':"3",
+    'idProblem':"3",
+    'idSummary':"3"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+
+url = "http://127.0.0.1:5000/api/projects/6"
+obj = {
+    'idSolution':"3",
+    'idProblem':"3",
+    'idSummary':"3"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+
+url = "http://127.0.0.1:5000/api/projects/7"
+obj = {
+    'idSolution':"3",
+    'idProblem':"3",
+    'idSummary':"3"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+
+url = "http://127.0.0.1:5000/api/projects/8"
+obj = {
+    'idSolution':"3",
+    'idProblem':"3",
+    'idSummary':"3"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+
+url = "http://127.0.0.1:5000/api/projects/9"
+obj = {
+    'idSolution':"3",
+    'idProblem':"3",
+    'idSummary':"3"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+
+url = "http://127.0.0.1:5000/api/projects/10"
+obj = {
+    'idSolution':"3",
+    'idProblem':"3",
+    'idSummary':"3"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+
+
+url = "http://127.0.0.1:5000/api/projects/11"
+obj = {
+    'idSolution':"3",
+    'idProblem':"3",
+    'idSummary':"3"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+
+url = "http://127.0.0.1:5000/api/projects/12"
+obj = {
+    'idSolution':"3",
+    'idProblem':"3",
+    'idSummary':"3"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+
+
+
 url = "http://127.0.0.1:5000/api/payment/1"
 obj = {
     'idUser':"1",
