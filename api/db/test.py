@@ -1,6 +1,15 @@
 import requests
 
 
+url = "http://127.0.0.1:5000/api/ngo"
+obj = {
+    'nameNGO':"Spendenhaus",
+    'emailNGO':"ngo@ngo.com"
+    }
+x = requests.post(url,headers = obj)
+print(x.text)
+
+
 url = "http://127.0.0.1:5000/api/image"
 obj = {
     'fileImage':"https://www.unicef.de/blob/221778/3c89d03bff7e4573ed1e8ab4fbd6d597/drc-mangelernaehrung-plumpy-nut-uni232071-data.jpg",
@@ -136,3 +145,42 @@ obj = {
 }
 x = requests.post(url,headers = obj)
 print(x.text)
+
+
+url = "http://127.0.0.1:5000/api/ngo"
+obj = {
+    'nameNGO':"Fussballspenden",
+    'emailNGO':"ngo@irgendwasmitFussball.com"
+    }
+x = requests.post(url,headers = obj)
+print(x.text)
+
+
+
+'''
+url = "http://127.0.0.1:5000/api/description/summary/1"
+obj = {
+    "descriptionSummary":"Funktioniert Summary es?",
+    'idImage': "1"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+
+url = "http://127.0.0.1:5000/api/description/solution/1"
+obj = {
+    "descriptionSolution":"Funktioniert Solution es?",
+    'idImage': "1"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+
+url = "http://127.0.0.1:5000/api/description/problem/1"
+obj = {
+    "descriptionProblem":"Funktioniert Problem es?",
+    'idImage': "1"
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+'''
