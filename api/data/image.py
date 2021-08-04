@@ -1,5 +1,6 @@
 """User Resource."""
 import re
+from sqlalchemy.exc import DBAPIError
 import validators
 from flask import Blueprint, request, jsonify
 from sqlalchemy import func
@@ -78,3 +79,52 @@ def image_post(session):
     session.commit()
     return jsonify({'status': 'Bild POST war erfolgreich'}), 201 #hier auf status achten!
     
+@BP.route('/<id>', methods=['PUT'])
+@db_session_dec
+def image_put(session, id):
+    image_id = id
+
+    try:
+        if image_id:
+            int(image_id)
+    except ValueError:
+        return jsonify({'error': 'bad argument'}), 400
+    results = session.query(Image)
+
+    
+    try:
+        old = results.filter(Image.idImage  == image_id).one()
+    except NoResultFound:
+        return jsonify({'error': 'Image not found'}), 404
+    
+    
+    
+    fileimage = request.headers.get('fileImage', default=old.fileImage )
+    descriptionimage  = request.headers.get('descriptionImage', default=old.descriptionImage )
+    formatimage   = request.headers.get('formatImage', default=old.formatImage )
+    
+    print(results)
+    
+
+    try:
+        if image_id:
+            results.filter(Image.idImage == image_id).one()
+        else:
+            return jsonify({'error':'missing argument'}), 400
+    except NoResultFound:
+        return jsonify({'error': 'Image not found'}), 404
+
+    
+
+    
+    if None in [fileimage,descriptionimage,formatimage]:
+        return jsonify({'error': 'Missing parameter'}), 400
+
+    if "" in [fileimage,descriptionimage,formatimage]:
+        return jsonify({'error': 'Empty parameter'}), 400
+    try:
+        result = results.filter(Image.idImage == image_id).update({'fileImage' : fileimage, 'descriptionImage' : descriptionimage, 'formatImage' : formatimage })
+    except Exception as msg:
+        return jsonify({'error': repr(msg)}), 400
+    session.commit()
+    return jsonify({'status': 'changed'}), 200
