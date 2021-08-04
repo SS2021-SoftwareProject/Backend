@@ -209,3 +209,144 @@ def problem_post(session):
     session.add(desc_inst)
     session.commit()
     return jsonify({'status': 'Problem POST erfogreich'}), 201
+
+
+@BP.route('/summary/<id>', methods=['PUT'])
+@db_session_dec
+def summary_put(session, id):
+    summary_id = id
+
+    try:
+        if summary_id:
+            int(summary_id)
+    except ValueError:
+        return jsonify({'error': 'bad argument'}), 400
+    results = session.query(Summary)
+    
+    try:
+        old = results.filter(Summary.idSummary == summary_id).one()
+    except NoResultFound:
+        return jsonify({'error': 'Summary not found'}), 404
+
+    image = request.headers.get('idImage', default=old.idImage)
+    desc = request.headers.get('descriptionSummary', default=old.descriptionSummary)
+
+    
+
+    try:
+        if summary_id:
+            results.filter(Summary.idSummary == summary_id).one()
+        else:
+            return jsonify({'error':'missing argument'}), 400
+    except NoResultFound:
+        return jsonify({'error': 'Summary not found'}), 404
+
+    
+
+    if None in [image, desc]:
+        return jsonify({'error': 'Missing parameter'}), 400
+
+    if "" in [image]:
+        return jsonify({'error': 'Empty parameter'}), 400
+        
+    try:
+        result = results.filter(Summary.idSummary == summary_id).update({'idImage' : image, 'descriptionSummary' : desc})
+    except Exception as msg:
+        return jsonify({'error': repr(msg)}), 400
+    
+    session.commit()
+    return jsonify({'status': 'changed'}), 200
+
+@BP.route('/solution/<id>', methods=['PUT'])
+@db_session_dec
+def solution_put(session, id):
+    solution_id = id
+
+    try:
+        if solution_id:
+            int(solution_id)
+    except ValueError:
+        return jsonify({'error': 'bad argument'}), 400
+    results = session.query(Solution)
+    
+    try:
+        old = results.filter(Solution.idSolution == solution_id).one()
+    except NoResultFound:
+        return jsonify({'error': 'Solution not found'}), 404
+
+    image = request.headers.get('idImage', default=old.idImage)
+    desc = request.headers.get('descriptionSolution', default=old.descriptionSolution)
+
+    
+
+    try:
+        if solution_id:
+            results.filter(Solution.idSolution == solution_id).one()
+        else:
+            return jsonify({'error':'missing argument'}), 400
+    except NoResultFound:
+        return jsonify({'error': 'Solution not found'}), 404
+
+    
+
+    if None in [image, desc]:
+        return jsonify({'error': 'Missing parameter'}), 400
+
+    if "" in [image]:
+        return jsonify({'error': 'Empty parameter'}), 400
+        
+    try:
+        result = results.filter(Solution.idSolution == solution_id).update({'idImage' : image, 'descriptionSolution' : desc})
+    except Exception as msg:
+        return jsonify({'error': repr(msg)}), 400
+    
+    session.commit()
+    return jsonify({'status': 'changed'}), 200
+
+
+
+@BP.route('/problem/<id>', methods=['PUT'])
+@db_session_dec
+def problem_put(session, id):
+    problem_id = id
+
+    try:
+        if problem_id:
+            int(problem_id)
+    except ValueError:
+        return jsonify({'error': 'bad argument'}), 400
+    results = session.query(Problem)
+    
+    try:
+        old = results.filter(Problem.idProblem == problem_id).one()
+    except NoResultFound:
+        return jsonify({'error': 'Problem not found'}), 404
+
+    image = request.headers.get('idImage', default=old.idImage)
+    desc = request.headers.get('descriptionProblem', default=old.descriptionProblem)
+
+    
+
+    try:
+        if problem_id:
+            results.filter(Problem.idProblem == problem_id).one()
+        else:
+            return jsonify({'error':'missing argument'}), 400
+    except NoResultFound:
+        return jsonify({'error': 'Problem not found'}), 404
+
+    
+
+    if None in [image, desc]:
+        return jsonify({'error': 'Missing parameter'}), 400
+
+    if "" in [image]:
+        return jsonify({'error': 'Empty parameter'}), 400
+        
+    try:
+        result = results.filter(Problem.idProblem == problem_id).update({'idImage' : image, 'descriptionProblem' : desc})
+    except Exception as msg:
+        return jsonify({'error': repr(msg)}), 400
+    
+    session.commit()
+    return jsonify({'status': 'changed'}), 200
