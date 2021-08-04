@@ -2,6 +2,7 @@
 
 import re
 import validators
+from datetime import datetime
 from flask.app import Flask
 from flask import Blueprint, request, jsonify
 from sqlalchemy import func
@@ -141,7 +142,7 @@ def signup_post(session):
         'PasswordToken':new_user.passwordtokenUser,
         'Publickey':new_user.publickeyUser,
         'Privatekey':new_user.privatkeyUser,
-        'RegisterDate':new_user.registryAtUser
+        'RegisterDate':datetime.now()
     }
     return jsonify({'success': 'User registered', 'user' : new_userJson}), 200
 
