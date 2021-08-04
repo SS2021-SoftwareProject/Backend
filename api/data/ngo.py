@@ -80,8 +80,6 @@ def ngo_put(session, id):
     email = request.headers.get('emailNGO', default=old.emailNGO)
 
     
-    print(results)
-    
 
     try:
         if ngo_id:

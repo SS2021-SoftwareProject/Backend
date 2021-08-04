@@ -128,23 +128,23 @@ def add_sample_data(db_session):
 
     images: List[Image] = [
         Image(idImage=1,
-            fileImage=bin(42),
+            fileImage="https://www.unicef.de/blob/221778/3c89d03bff7e4573ed1e8ab4fbd6d597/drc-mangelernaehrung-plumpy-nut-uni232071-data.jpg",
             descriptionImage="The answer to everything, probably",
             formatImage="jpg"),
         Image(idImage=2,
-            fileImage=bin(69),
+            fileImage="https://www.worldvision.de/sites/worldvision.de/files/styles/campaign_teaser_896x672/public/editorial/campaign-teaser/2019-12/WolrdVison_Katasprophenhilfe_HungerinAfrika_HeroSpace.jpg?itok=RmGjmU1d",
             descriptionImage="A nice image",
             formatImage="jpg"),
         Image(idImage=3,
-            fileImage=bin(420),
+            fileImage="https://www.kfw-entwicklungsbank.de/Bilder/Bilderordner/SDGs/SDG-2/SDG_2_Interview_Responsive_1080x608.jpg",
             descriptionImage="Another nice image",
             formatImage="png"),
         Image(idImage=4,
-            fileImage=bin(1337),
+            fileImage="https://unicef.at/fileadmin/_processed_/b/9/csm_UNICEF-kind-leerer-teller-UN0345138_d78780f7b6.jpg",
             descriptionImage="The best image",
             formatImage="png"),
         Image(idImage=5,
-            fileImage=bin(666),
+            fileImage="https://www.unicef.de/blob/202746/503c5ca7ad1d6448c10da3c805599367/suedsudan-maria-buehne-un0152183-data.jpg",
             descriptionImage="Don't use this image",
             formatImage="jpg"),
     ]
@@ -335,6 +335,87 @@ def add_sample_data(db_session):
                 shouldAmountProject= 3000,
                 paymentInformationProject="some Payment informations ",
                 pageProject= "www.Project3.com"
+                ),
+        Project(idProject=4,
+                nameProject= "Test Project Nr.4",
+                statusProject= "finished",
+                shortDescription = "Its extremly short",
+                amountProject=5000,
+                shouldAmountProject= 5000,
+                paymentInformationProject="some Payment informations ",
+                pageProject= "www.Project2.com"
+                ),
+        Project(idProject=5,
+                nameProject= "Test Project Nr.5",
+                statusProject= "finished",
+                shortDescription = "Its extremly short",
+                amountProject=5000,
+                shouldAmountProject= 5000,
+                paymentInformationProject="some Payment informations ",
+                pageProject= "www.Project2.com"
+                ),
+        Project(idProject=6,
+                nameProject= "Test Project Nr.6",
+                statusProject= "finished",
+                shortDescription = "Its extremly short",
+                amountProject=5000,
+                shouldAmountProject= 5000,
+                paymentInformationProject="some Payment informations ",
+                pageProject= "www.Project2.com"
+                ),
+        Project(idProject=7,
+                nameProject= "Test Project Nr.7",
+                statusProject= "finished",
+                shortDescription = "Its extremly short",
+                amountProject=5000,
+                shouldAmountProject= 5000,
+                paymentInformationProject="some Payment informations ",
+                pageProject= "www.Project2.com"
+                ),
+        Project(idProject=8,
+                nameProject= "Test Project Nr.8",
+                statusProject= "finished",
+                shortDescription = "Its extremly short",
+                amountProject=5000,
+                shouldAmountProject= 5000,
+                paymentInformationProject="some Payment informations ",
+                pageProject= "www.Project2.com"
+                ),
+        Project(idProject=9,
+                nameProject= "Test Project Nr.9",
+                statusProject= "finished",
+                shortDescription = "Its extremly short",
+                amountProject=5000,
+                shouldAmountProject= 5000,
+                paymentInformationProject="some Payment informations ",
+                pageProject= "www.Project2.com"
+                ),
+        Project(idProject=10,
+                nameProject= "Test Project Nr.10",
+                statusProject= "finished",
+                shortDescription = "Its extremly short",
+                amountProject=5000,
+                shouldAmountProject= 5000,
+                paymentInformationProject="some Payment informations ",
+                pageProject= "www.Project2.com"
+                ),
+        Project(idProject=11,
+                nameProject= "Test Project Nr.11",
+                statusProject= "finished",
+                shortDescription = "Its extremly short",
+                amountProject=5000,
+                shouldAmountProject= 5000,
+                paymentInformationProject="some Payment informations ",
+                pageProject= "www.Project2.com"
+                ),
+        Project(idProject=12,
+                nameProject= "Test Project Nr.12",
+                statusProject= "finished",
+                shortDescription = "Its extremly short",
+                amountProject=5000,
+                shouldAmountProject= 5000,
+                paymentInformationProject="some Payment informations ",
+                pageProject= "www.Project2.com"
                 )
     ]
 
@@ -345,11 +426,35 @@ def add_sample_data(db_session):
     projects[1].idImage = images[1].idImage
     projects[1].idNGO =ngos[1].idNGO
 
-
     projects[2].idImage = images[2].idImage
     projects[2].idNGO =ngos[2].idNGO
 
+    projects[3].idImage = images[3].idImage
+    projects[3].idNGO =ngos[2].idNGO
 
+    projects[4].idImage = images[4].idImage
+    projects[4].idNGO =ngos[2].idNGO
+
+    projects[5].idImage = images[2].idImage
+    projects[5].idNGO =ngos[2].idNGO
+
+    projects[6].idImage = images[1].idImage
+    projects[6].idNGO =ngos[2].idNGO
+
+    projects[7].idImage = images[3].idImage
+    projects[7].idNGO =ngos[2].idNGO
+
+    projects[8].idImage = images[4].idImage
+    projects[8].idNGO =ngos[2].idNGO
+
+    projects[9].idImage = images[1].idImage
+    projects[9].idNGO =ngos[2].idNGO
+
+    projects[10].idImage = images[2].idImage
+    projects[10].idNGO =ngos[2].idNGO
+
+    projects[11].idImage = images[1].idImage
+    projects[11].idNGO =ngos[2].idNGO
 
 
     

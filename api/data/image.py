@@ -103,7 +103,6 @@ def image_put(session, id):
     descriptionimage  = request.headers.get('descriptionImage', default=old.descriptionImage )
     formatimage   = request.headers.get('formatImage', default=old.formatImage )
     
-    print(results)
     
 
     try:

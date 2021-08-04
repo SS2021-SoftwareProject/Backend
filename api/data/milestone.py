@@ -175,9 +175,6 @@ def milestone_put(session, id):
     amountmilestone= request.headers.get('amountMilestone', default=old.amountMilestone)
     descriptionmilestone = request.headers.get('descriptionMilestone', default=old.descriptionMilestone)
     
-    
-    print(results)
-    
 
     try:
         if milestone_id:

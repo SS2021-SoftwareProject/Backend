@@ -120,9 +120,6 @@ def payment_put(session, id):
     datepayment= request.headers.get('datePayment', default=old.datePayment)
     
     
-    print(results)
-    
-
     try:
         if payment_id:
             results.filter(Payment.idPayment == payment_id).one()
