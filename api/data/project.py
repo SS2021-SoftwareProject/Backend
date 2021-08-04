@@ -2,6 +2,7 @@ import binascii
 import json
 import time
 from base64 import b64decode
+from sqlalchemy.exc import DBAPIError
 
 import validators
 from flask import Blueprint, request, jsonify
@@ -318,3 +319,57 @@ def projekt_post(session):
     session.add(projekt_inst)
     session.commit()
     return jsonify({'status': 'Project POST erfolgreich'}), 201
+
+
+@BP.route('/<id>', methods=['PUT'])
+@db_session_dec
+def Project_put(session, id):
+    project_id = id
+
+    try:
+        if project_id:
+            int(project_id)
+    except ValueError:
+        return jsonify({'error': 'bad argument'}), 400
+    results = session.query(Project)
+    try:
+        old = results.filter(Project.idProject == project_id).one()
+    except NoResultFound:
+        return jsonify({'error': 'Projekt not found'}), 404
+
+    ngo = request.headers.get('idNGO', default=old.idNGO)
+    image = request.headers.get('idImage', default=old.idImage)
+    shortDesc = request.headers.get('shortDescription ', default=old.shortDescription )
+    solution = request.headers.get('idSolution', default=old.idSolution)
+    summary = request.headers.get('idSummary', default=old.idSummary)
+    problem = request.headers.get('idProblem', default=old.idProblem)
+    name = request.headers.get('nameProject', default=old.nameProject)
+    status = request.headers.get('statusProject', default=old.statusProject)
+    amount = request.headers.get('amountProject', default=old.amountProject)
+    souldAmaunt = request.headers.get('shouldAmountProject', default=old.shouldAmountProject)
+    payment = request.headers.get('paymentInformationProject', default=old.paymentInformationProject)
+    page = request.headers.get('pageProject', default=old.pageProject)
+
+    try:
+        if project_id:
+            results.filter(Project.idProject == project_id).one()
+        else:
+            return jsonify({'error':'missing argument'}), 400
+    except NoResultFound:
+        return jsonify({'error': 'NGO not found'}), 404
+
+    
+    if None in [solution, summary, problem, image, shortDesc, name, status, amount, souldAmaunt, payment, page]:
+        return jsonify({'error': 'Missing parameter'}), 400
+
+    if "" in [solution, summary, problem, image, name, status, amount, souldAmaunt, payment, page]:
+        return jsonify({'error': "Empty parameter"}), 400 #IF-Anweisung Fehlerhaft wird nach Refactor geändert
+        
+
+    try:
+        result = results.filter(Project.idProject == project_id).update({'idNGO' : ngo, 'idImage' : image, 'shortDescription' : shortDesc, 'idSolution' : solution, 'idSummary' : summary,
+     'idProblem' : problem, 'nameProject' : name, 'statusProject' : status, 'amountProject' : amount, 'shouldAmountProject' : souldAmaunt, 'paymentInformationProject' : payment, 'pageProject' : page})
+    except Exception as msg:
+        return jsonify({'error': repr(msg)}), 400
+    session.commit()
+    return jsonify({'status': 'changed'}), 200

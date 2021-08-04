@@ -2,7 +2,7 @@ import click
 from flask.cli import with_appcontext
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
-from .dbStructure import BASE
+from .dbStructure import BASE, add_sample_data
 
 DB_URI = "mariadb+mariadbconnector://rootApi:thiel@127.0.0.1:3306/backend"
 ENGINE = create_engine(DB_URI)
@@ -25,7 +25,7 @@ def init_db():
     """
     BASE.metadata.drop_all(ENGINE)
     BASE.metadata.create_all(ENGINE)
-    #add_sample_data(DB_SESSION)
+    add_sample_data(DB_SESSION)
 
 
 @click.command('init-db')
