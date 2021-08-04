@@ -113,10 +113,10 @@ def contributions_by_user_id_get(session, id):
 @db_session_dec
 @cross_origin()
 def signup_post(session):
-    email = request.headers.get('email')
-    password = request.headers.get('password')
-    firstname = request.headers.get('firstname')
-    lastname = request.headers.get('lastname')
+    email = request.values.get('email')
+    password = request.values.get('password')
+    firstname = request.values.get('firstname')
+    lastname = request.values.get('lastname')
     results = session.query(User)
     user = results.filter(User.emailUser == email).first()
     if None in [firstname, lastname, email, password]:
@@ -150,8 +150,8 @@ def signup_post(session):
 @db_session_dec
 @cross_origin()
 def login_post(session):
-    email = request.headers.get('email')
-    password = request.headers.get('password')
+    email = request.values.get('email')
+    password = request.values.get('password')
 
     results = session.query(User)
     user = results.filter(User.emailUser == email).first()
