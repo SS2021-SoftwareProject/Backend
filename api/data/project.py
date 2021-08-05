@@ -344,18 +344,23 @@ def Project_put(session, id):
     except NoResultFound:
         return jsonify({'error': 'Projekt not found'}), 404
 
-    ngo = request.headers.get('idNGO', default=old.idNGO)
-    image = request.headers.get('idImage', default=old.idImage)
-    shortDesc = request.headers.get('shortDescription ', default=old.shortDescription )
-    solution = request.headers.get('idSolution', default=old.idSolution)
-    summary = request.headers.get('idSummary', default=old.idSummary)
-    problem = request.headers.get('idProblem', default=old.idProblem)
-    name = request.headers.get('nameProject', default=old.nameProject)
-    status = request.headers.get('statusProject', default=old.statusProject)
-    amount = request.headers.get('amountProject', default=old.amountProject)
-    souldAmaunt = request.headers.get('shouldAmountProject', default=old.shouldAmountProject)
-    payment = request.headers.get('paymentInformationProject', default=old.paymentInformationProject)
-    page = request.headers.get('pageProject', default=old.pageProject)
+    ngo = request.args.get('idNGO', default=old.idNGO)
+    image = request.args.get('idImage', default=old.idImage)
+    shortDesc = request.args.get('shortDescription ', default=old.shortDescription )
+    solution = request.args.get('idSolution', default=old.idSolution)
+    summary = request.args.get('idSummary', default=old.idSummary)
+    problem = request.args.get('idProblem', default=old.idProblem)
+    name = request.args.get('nameProject', default=old.nameProject)
+    status = request.args.get('statusProject', default=old.statusProject)
+    amount = request.args.get('amountProject', default=old.amountProject)
+    souldAmaunt = request.args.get('shouldAmountProject', default=old.shouldAmountProject)
+    payment = request.args.get('paymentInformationProject', default=old.paymentInformationProject)
+    page = request.args.get('pageProject', default=old.pageProject)
+
+    print(f"args : {request.args}")
+    print(f"form : {request.form}")
+    print(f"data : {request.data}")
+    print(f"headers : {request.headers}")
 
     try:
         if project_id:
