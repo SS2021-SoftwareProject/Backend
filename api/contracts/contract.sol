@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: GPL-3.0
 
 pragma solidity >=0.7.0 <0.9.0;
 
@@ -17,6 +16,10 @@ contract Collect{
         require(collectedMoney>=goal);
         _;   
     }
+    modifier enough{
+        require(msg.value>=1000);
+        _;
+    }
     
     struct Donator{
         address payable donator;
@@ -31,7 +34,7 @@ contract Collect{
     uint timeout;
     address payable receiver;
     
-    function donate() public payable inTime {
+    function donate() public payable inTime enough{
        collectedMoney += msg.value;
         don =  Donator(payable(msg.sender),msg.value);
        donators.push(don);   
@@ -52,7 +55,7 @@ contract Collect{
         owner=payable(msg.sender);
     }
     
-    function refund() public ownerInvo (){
+    function refund() public ownerInvo{
         uint length = donators.length;
         for(uint i=0; i<length;i++){
             donators[i].donator.transfer(donators[i].amount);     

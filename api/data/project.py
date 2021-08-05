@@ -15,7 +15,7 @@ from api.db.dbStructure import Summary
 from api.db.dbStructure import Problem
 from api.db.dbStructure import Solution
 from api.db.dbStructure import Image
-
+from api.data.contract_calls import project_constructor
 
 
 BP = Blueprint('projects', __name__, url_prefix='/api/projects')
@@ -283,20 +283,27 @@ def projekt_post(session):
     status = request.headers.get('statusProject', default=None)
     actualSum = request.headers.get('amountProject', default=None)
     shouldSum = request.headers.get('shouldAmountProject', default=None)
-    paymentInformation = request.headers.get('paymentInformationProject', default=None)
     page = request.headers.get('pageProject', default=None)
     sumID = request.headers.get('idSummary', default=None)
     probID = request.headers.get('idProblem', default=None)
     solID = request.headers.get('idSolution', default=None)
     shortDesc = request.headers.get('shortDescription', default=None)
 
-    if None in [name, status, actualSum, shouldSum, paymentInformation, shortDesc ,page]:
+    
+
+    if None in [name, status, actualSum, shouldSum, shortDesc ,page]:
         return jsonify({'error': 'Missing parameter'}), 400
 
-    if "" in [name, status, actualSum, shouldSum, paymentInformation, page]:
+    if "" in [name, status, actualSum, shouldSum, page]:
         return jsonify({'error': "Empty parameter"}), 400
 
     """acc = WEB3.eth.account.create()"""
+    paymentInformation = project_constructor(300000,10)
+
+
+    if None in [paymentInformation]:
+        return jsonify({'error': 'Contract konnte nicht erstellt werden'}), 400
+
     try:
         projekt_inst = Project(nameProject=name,
                             idImage = image,

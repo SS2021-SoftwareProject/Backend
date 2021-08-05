@@ -5,6 +5,7 @@ from . import user
 from . import payment
 from . import ngo
 from . import description
+from . import contract_calls
 from . import annotations
 
 

@@ -140,8 +140,8 @@ def signup_post(session):
         'lastname':new_user.lastNameUser,
         'email':new_user.emailUser,
         'PasswordToken':new_user.passwordtokenUser,
-        'Publickey':new_user.publickeyUser,
-        'Privatekey':new_user.privatkeyUser,
+        'Publickey':'0x54DD30d58a423332C64a180D830e264D8C23a8cF',
+        'Privatekey':'e7ef6fa199620acaa0c1b04f6bcbbbb6c22e2c52e9685386427f128eae4c8630',
         'RegisterDate':datetime.now()
     }
     return jsonify({'success': 'User registered', 'user' : new_userJson}), 200

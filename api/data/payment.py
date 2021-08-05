@@ -6,7 +6,12 @@ from sqlalchemy import func
 from .annotations import db_session_dec
 from datetime import datetime
 from sqlalchemy.orm.exc import NoResultFound
+from api.db.dbStructure import User
+from api.db.dbStructure import Project
+
 from api.db.dbStructure import Payment
+from api.data.contract_calls import project_constructor
+from api.data.contract_calls import project_donate
 from web3 import Web3
 
 BP = Blueprint('payment', __name__, url_prefix='/api/payment')
@@ -77,9 +82,33 @@ def zahlung_post(session):
     status = request.args.get('status', default="complete")
     date = request.args.get('date', default=datetime.now())
 
+    myUser = session.query(User)
+    projects = session.query(Project)
+
+    try:
+        if user:
+            myUser = myUser.filter(User.idUser == user).one()
+        else:
+            return jsonify({'error':'missing argument'}), 400
+    except NoResultFound:
+        return jsonify({'error': 'Payment not found'}), 404
+
+
+    
+    
+    theProject = projects.filter(Project.idProject == project).one()
+    project_donate(theProject, myUser, amount)
+
     # ----------------------------------------------------------------------------------------------------
     # Append to Blockchain
     # ----------------------------------------------------------------------------------------------------
+    
+    
+
+    try:
+        projects.filter(Project.idProject == project).update
+    except NoResultFound:
+        return jsonify({'error': 'Payment not found'}), 404
 
     if None in [user, project, amount]:
         return jsonify({'error': 'Missing parameter'}), 400
