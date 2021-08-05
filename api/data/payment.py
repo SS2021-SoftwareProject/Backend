@@ -95,10 +95,12 @@ def zahlung_post(session):
         return jsonify({'error': 'Payment not found'}), 404
 
 
-    
-    
+    gwei = (int(amount) * 363841)
+    wei = (int(gwei) * 1000000000)
+
+
     theProject = projects.filter(Project.idProject == project).one()
-    project_donate(theProject, myUser, amount)
+    project_donate(theProject, myUser, wei)
 
     # ----------------------------------------------------------------------------------------------------
     # Append to Blockchain
@@ -112,13 +114,13 @@ def zahlung_post(session):
         return jsonify({'error': 'Payment not found'}), 404
 
     # DONT CHANGE!------------------------------------------------
-    url = 'http://127.0.0.1:6000/new_block'
-    data= {'transaction': project,
-            'amount' : amount,
-            'customerID': user}
+    #url = 'http://127.0.0.1:6000/new_block'
+    #data= {'transaction': project,
+    #        'amount' : amount,
+    #        'customerID': user}
 
 
-    requests.post(url, data = data)
+    #requests.post(url, data = data)
     # DONT CHANGE!------------------------------------------------
 
 

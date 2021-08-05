@@ -345,14 +345,14 @@ obj = {
 }
 x = requests.put(url,headers=obj)
 print(x.text)
-
+'''
 
 url = "http://127.0.0.1:5000/api/projects"
 obj = {
-    'nameProject':"Besonderes Projekt",
+    'nameProject':"Besonderes Top Projekt",
     'statusProject':'100.0',
     'amountProject':"1222.0",
-    'shouldAmountProject':"4984844.0",
+    'shouldAmountProject':"5000",
     'shortDescription': "teststestt",
     'pageProject':"https://google.com",
     'idImage':"1",
@@ -362,13 +362,15 @@ obj = {
 }
 x = requests.post(url,headers = obj)
 print(x.text)
+
 '''
 url = "http://127.0.0.1:5000/api/payment"
 obj = {
     "idUser":"1",
     "idProject":"13",
-    "amountPayment":"200.0",
+    "amountPayment":"200",
     "statePayment":"1"
 }
 x = requests.post(url,headers = obj)
 print(x.text)
+'''

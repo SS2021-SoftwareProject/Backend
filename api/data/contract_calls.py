@@ -33,7 +33,7 @@ def project_constructor(goal: int, duration: int):
                                 {
                                     'nonce': WEB3.eth.getTransactionCount(acc1), 
                                     'from': acc1, 
-                                    'value': goal, 
+                                    'value': WEB3.toHex(WEB3.toWei(goal, 'gwei')), 
                                     'gasPrice': WEB3.toHex(WEB3.toWei('20', 'gwei')),
                                     'gas': 1000000,
                                     'value':0

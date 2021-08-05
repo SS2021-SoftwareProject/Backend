@@ -298,7 +298,7 @@ def projekt_post(session):
         return jsonify({'error': "Empty parameter"}), 400
 
     """acc = WEB3.eth.account.create()"""
-    paymentInformation = project_constructor(300000,10)
+    paymentInformation = project_constructor((int(shouldSum) * 363841),10)
 
 
     if None in [paymentInformation]:
