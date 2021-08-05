@@ -1,4 +1,5 @@
 import requests
+import random
 '''
 
 url = "http://127.0.0.1:5000/api/ngo"
@@ -57,9 +58,9 @@ obj = {
     'paymentInformationProject':"kein Plan",
     'pageProject':"https://google.com",
     'idImage':"1",
-    'idSolution':"1",
-    'idProblem':"1",
-    'idSummary':"1"
+    'idSolution':str(random.randint(1,3)),
+    'idProblem':str(random.randint(1,3)),
+    'idSummary':str(random.randint(1,3))
 }
 x = requests.post(url,headers = obj)
 print(x.text)
@@ -75,9 +76,9 @@ obj = {
     'paymentInformationProject':"Immernoch kein Plan",
     'pageProject':"https://google.com",
     'idImage':"1",
-    'idSolution':"1",
-    'idProblem':"1",
-    'idSummary':"1"
+    'idSolution':str(random.randint(1,3)),
+    'idProblem':str(random.randint(1,3)),
+    'idSummary':str(random.randint(1,3))
 }
 x = requests.post(url,headers = obj)
 print(x.text)
@@ -187,36 +188,36 @@ print(x.text)
 
 url = "http://127.0.0.1:5000/api/projects/1"
 obj = {
-    'idSolution':"1",
-    'idProblem':"1",
-    'idSummary':"1"
+    'idSolution':str(random.randint(1,3)),
+    'idProblem':str(random.randint(1,3)),
+    'idSummary':str(random.randint(1,3))
 }
 x = requests.put(url,headers=obj)
 print(x.text)
 
 url = "http://127.0.0.1:5000/api/projects/2"
 obj = {
-    'idSolution':"2",
-    'idProblem':"2",
-    'idSummary':"2"
+    'idSolution':str(random.randint(1,3)),
+    'idProblem':str(random.randint(1,3)),
+    'idSummary':str(random.randint(1,3))
 }
 x = requests.put(url,headers=obj)
 print(x.text)
 
 url = "http://127.0.0.1:5000/api/projects/3"
 obj = {
-    'idSolution':"3",
-    'idProblem':"3",
-    'idSummary':"3"
+    'idSolution':str(random.randint(1,3)),
+    'idProblem':str(random.randint(1,3)),
+    'idSummary':str(random.randint(1,3))
 }
 x = requests.put(url,headers=obj)
 print(x.text)
 
 url = "http://127.0.0.1:5000/api/projects/4"
 obj = {
-    'idSolution':"3",
-    'idProblem':"3",
-    'idSummary':"3"
+    'idSolution':str(random.randint(1,3)),
+    'idProblem':str(random.randint(1,3)),
+    'idSummary':str(random.randint(1,3))
 }
 x = requests.put(url,headers=obj)
 print(x.text)
@@ -224,9 +225,9 @@ print(x.text)
 
 url = "http://127.0.0.1:5000/api/projects/5"
 obj = {
-    'idSolution':"3",
-    'idProblem':"3",
-    'idSummary':"3"
+    'idSolution':str(random.randint(1,3)),
+    'idProblem':str(random.randint(1,3)),
+    'idSummary':str(random.randint(1,3))
 }
 x = requests.put(url,headers=obj)
 print(x.text)
@@ -234,9 +235,9 @@ print(x.text)
 
 url = "http://127.0.0.1:5000/api/projects/6"
 obj = {
-    'idSolution':"3",
-    'idProblem':"3",
-    'idSummary':"3"
+    'idSolution':str(random.randint(1,3)),
+    'idProblem':str(random.randint(1,3)),
+    'idSummary':str(random.randint(1,3))
 }
 x = requests.put(url,headers=obj)
 print(x.text)
@@ -244,9 +245,9 @@ print(x.text)
 
 url = "http://127.0.0.1:5000/api/projects/7"
 obj = {
-    'idSolution':"3",
-    'idProblem':"3",
-    'idSummary':"3"
+    'idSolution':str(random.randint(1,3)),
+    'idProblem':str(random.randint(1,3)),
+    'idSummary':str(random.randint(1,3))
 }
 x = requests.put(url,headers=obj)
 print(x.text)
@@ -254,9 +255,9 @@ print(x.text)
 
 url = "http://127.0.0.1:5000/api/projects/8"
 obj = {
-    'idSolution':"3",
-    'idProblem':"3",
-    'idSummary':"3"
+    'idSolution':str(random.randint(1,3)),
+    'idProblem':str(random.randint(1,3)),
+    'idSummary':str(random.randint(1,3))
 }
 x = requests.put(url,headers=obj)
 print(x.text)
@@ -264,9 +265,9 @@ print(x.text)
 
 url = "http://127.0.0.1:5000/api/projects/9"
 obj = {
-    'idSolution':"3",
-    'idProblem':"3",
-    'idSummary':"3"
+    'idSolution':str(random.randint(1,3)),
+    'idProblem':str(random.randint(1,3)),
+    'idSummary':str(random.randint(1,3))
 }
 x = requests.put(url,headers=obj)
 print(x.text)
@@ -274,9 +275,9 @@ print(x.text)
 
 url = "http://127.0.0.1:5000/api/projects/10"
 obj = {
-    'idSolution':"3",
-    'idProblem':"3",
-    'idSummary':"3"
+    'idSolution':str(random.randint(1,3)),
+    'idProblem':str(random.randint(1,3)),
+    'idSummary':str(random.randint(1,3))
 }
 x = requests.put(url,headers=obj)
 print(x.text)
@@ -285,9 +286,9 @@ print(x.text)
 
 url = "http://127.0.0.1:5000/api/projects/11"
 obj = {
-    'idSolution':"3",
-    'idProblem':"3",
-    'idSummary':"3"
+    'idSolution':str(random.randint(1,3)),
+    'idProblem':str(random.randint(1,3)),
+    'idSummary':str(random.randint(1,3))
 }
 x = requests.put(url,headers=obj)
 print(x.text)
@@ -295,13 +296,66 @@ print(x.text)
 
 url = "http://127.0.0.1:5000/api/projects/12"
 obj = {
-    'idSolution':"3",
-    'idProblem':"3",
-    'idSummary':"3"
+    'idSolution':str(random.randint(1,3)),
+    'idProblem':str(random.randint(1,3)),
+    'idSummary':str(random.randint(1,3))
 }
 x = requests.put(url,headers=obj)
 print(x.text)
 
+url = "http://127.0.0.1:5000/api/projects/13"
+obj = {
+    'idSolution':str(random.randint(1,3)),
+    'idProblem':str(random.randint(1,3)),
+    'idSummary':str(random.randint(1,3))
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+url = "http://127.0.0.1:5000/api/projects/14"
+obj = {
+    'idSolution':str(random.randint(1,3)),
+    'idProblem':str(random.randint(1,3)),
+    'idSummary':str(random.randint(1,3))
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+url = "http://127.0.0.1:5000/api/projects/15"
+obj = {
+    'idSolution':str(random.randint(1,3)),
+    'idProblem':str(random.randint(1,3)),
+    'idSummary':str(random.randint(1,3))
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+url = "http://127.0.0.1:5000/api/projects/16"
+obj = {
+    'idSolution':str(random.randint(1,3)),
+    'idProblem':str(random.randint(1,3)),
+    'idSummary':str(random.randint(1,3))
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+url = "http://127.0.0.1:5000/api/projects/17"
+obj = {
+    'idSolution':str(random.randint(1,3)),
+    'idProblem':str(random.randint(1,3)),
+    'idSummary':str(random.randint(1,3))
+}
+x = requests.put(url,headers=obj)
+print(x.text)
+
+url = "http://127.0.0.1:5000/api/projects/18"
+obj = {
+    'idSolution':str(random.randint(1,3)),
+    'idProblem':str(random.randint(1,3)),
+    'idSummary':str(random.randint(1,3))
+}
+x = requests.put(url,headers=obj)
+print(x.text)
 
 
 

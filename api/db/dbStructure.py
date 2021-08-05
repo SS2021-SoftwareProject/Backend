@@ -4,6 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from typing import List
+import random
 
 
 BASE: DeclarativeMeta = declarative_base()
@@ -103,25 +104,25 @@ def add_sample_data(db_session):
 
     milestones: List[Milestone] = [
         Milestone(idMilestone=1,
-            nameMilestone="Organisation and roles",
+            nameMilestone="Hunger relief for the families of Mduku",
             amountMilestone=12,
-            descriptionMilestone="Decide who does what and who controls and leads the teams"),
+            descriptionMilestone="Each parcel of food costs $35 and we will distribute one parcel (feeding a family of four) to 72 families who are identified as the most in-need by the tribal authorities and community health teams. "),
         Milestone(idMilestone=2,
-            nameMilestone="Modeling",
+            nameMilestone="Hunger relief for the Green Mambas",
             amountMilestone=34,
-            descriptionMilestone="Model of the database structure"),
+            descriptionMilestone="The Green Mambas are a group of 14 women, mostly single-mothers, who work seasonally for Wild Tomorrow Fund, helping on our reserve with green jobs including alien plant removal. We want to ensure these strong women and their children do not go hungry each month.  We will deliver 14 food parcels which cost $35 each to each Green Mamba for her family. "),
         Milestone(idMilestone=3,
-            nameMilestone="Database",
+            nameMilestone="Hunger Relief for the Habanathi Orphans",
             amountMilestone=45,
-            descriptionMilestone="Creation of the database"),
+            descriptionMilestone="These are the most vulnerable children in the community neighboring our wildlife reserve. Most live with their extended families after being orphaned, usually sadly due to HIV.  We will work together with Pastor Bonga of Habanathi EC Charity (who supports the orphans and their caretakers) to purchase food for 15 families. Each food parcel costs $35."),
         Milestone(idMilestone=4,
-            nameMilestone="API",
+            nameMilestone="Install a water storage tank and stand.",
             amountMilestone=67,
-            descriptionMilestone="Creation of the API for easy access to the database"),
+            descriptionMilestone="Install a water storage tank and stand."),
         Milestone(idMilestone=5,
-            nameMilestone="GUI",
+            nameMilestone="World Peace",
             amountMilestone=89,
-            descriptionMilestone="Visually pleasing GUI to provide access to the API instead of commands"),
+            descriptionMilestone="We did it!"),
     ]
 
     # fictional images, sample data. fileImage binary points nowhere. Change that if necessary
@@ -249,11 +250,11 @@ def add_sample_data(db_session):
 
     solutions: List[Solution] = [
         Solution(idSolution =1,
-                descriptionSolution="One way to solve the problem Nr.1"),
+                descriptionSolution="As part of Wild Tomorrow Fund’s Community Support program, we quickly sprang into action to organize an emergency hunger relief program. We raised enough funds for our first delivery in May for 63 families in need. Our goal is to raise additional funds to provide at least 100 families with emergency food parcels each month. These parcels will contain essentials such as rice, vegetables, oil, and canned fish and will keep families fed for a month. We are working directly with the community's traditional leadership (the Nduna) to help identify the neediest families. Any funds raised above our goal will enable us to extend the reach of the program. Each parcel included a note from Wild Tomorrow fund with a Zulu saying 'Umuntu ngumuntu ngabuntu' which translates to 'A person is a person because of people', a message of solidarity and our shared humanity in this difficult time. "),
         Solution(idSolution =2,
-                descriptionSolution="One way to solve the problem Nr.2"),
+                descriptionSolution="ChildVoice has solidified plans to expand its presence in the camp, and recently received a grant to build a new Youth Empowerment Center. For ChildVoice's students living in the Malkohi IDP camp – many of whom are victims of Boko Haram and other violent insurgent groups – water is a vital component of the programs they have developed to help war-affected youth recover from trauma and overwhelming loss. Without reliable access to water, ChildVoice simply will not be able to run their agriculture, culinary, and other water-dependent skills training programs.  As a crucial part of their new Youth Empowerment Center in the IDP camp, a new water well -- consisting of a borehole, solar-powered pump, storage tank, and taps -- will address a fundamental rehabilitative and economic development need that will otherwise go unmet. Water is essential for ChildVoice to provide life-changing agricultural and other vocational training programs for hundreds of their students. "),
         Solution(idSolution =3,
-                descriptionSolution="One way to solve the problem Nr.3")
+                descriptionSolution="South American Initiative will continue providing meals and clean drinking water to children and adults who are suffering from malnutrition in hospitals. New and expecting mothers will receive all the help they need to take care of their babies. We provide things like diapers, formula, feeding bottles, and other supplies with your donations. Help mothers and children survive the Venezuela crisis.")
     
     ]
 
@@ -269,11 +270,11 @@ def add_sample_data(db_session):
 
     summaries: List[Summary] = [
         Summary(idSummary =1,
-                descriptionSummary="A summary of the project Nr.1"),
+                descriptionSummary="The COVID19 crisis has deeply impacted southern Africa and particularly rural communities dependent on wildlife tourism for their livelihoods. Already vulnerable communities are now sliding into deeper poverty and hunger. You can help to provide food parcels to ensure that 100 families in the community next to our wildlife reserve, are able to eat for the month of October as part of our ongoing Hunger Relief Campaign. Just $35 is all it takes to buy a big parcel of food for a family for a month. Your support also keeps wildlife safe, by ensuring hungry people do not have to resort to bushmeat poaching to keep their families fed. "),
         Summary(idSummary =2,
-                descriptionSummary="A summary of the project Nr.2"),
+                descriptionSummary="The Malkohi internally displaced persons (IDP) camp in Adamawa State, Nigeria, currently has just one hand-pump water borehole (well and hand pump). It serves a population of 2,000-plus IDPs, most of whom are children and adolescents. ChildVoice is building a new Youth Empowerment Center to provide rehabilitative and skills training services for up to 200 ChildVoice students living in the camp. But this one existing well is simply not sufficient to meet the needs a skills training facility. To meet those needs, ChildVoice seeks to raise $5,600 to drill a new water well for its new Youth Empowerment Center."),
         Summary(idSummary =3,
-                descriptionSummary="A summary of the project Nr.3")
+                descriptionSummary="The health care system in Venezuela is declining rapidly. Each day, the press denounces the failing state of public hospitals. Increasingly, the health care crisis, and the shortage of medicine and food, have plagued the country. The Rafael Malpica hospital, located in Guacara (Valencia, Venezuela) is providing only rice for their patients. Many other hospitals are facing the same situation. Proteins are never included in their diet. This project will feed vulnerable adults and children in different hospitals.")
     
     ]
 
@@ -289,11 +290,11 @@ def add_sample_data(db_session):
 
     problems: List[Problem] = [
         Problem(idProblem=1,
-                descriptionProblem="A problem from the project Nr.1"),
+                descriptionProblem="The COVID19 crisis has deeply impacted the vulnerable communities we work with who live next door to our two wildlife reserves in KwaZulu-Natal South Africa. The economic impacts of South Africa’s strict lockdown are being felt on the ground in our rural community, posing a threat to both people and the protection of wildlife. Many people have lost their jobs and incomes, driving already poor families into deeper poverty and hunger. Community members who were working away from home in the city have returned for the lock-down, putting more pressure on families and their resources. Children in particular are at risk as many depend on a daily meal from school, which has been closed."),
         Problem(idProblem =2,
-                descriptionProblem="A problem from the project Nr.2"),
+                descriptionProblem="ChildVoice has been providing counseling, skills training, and related services to traumatized adolescent girls and their children in Nigeria for three years now. The organization is now on the verge of solidifying their presence in the Malkohi IDP camp with a new Youth Empowerment Center, making their students’ dreams of having expanded agricultural and other vocational training programs a reality.  While this is an amazing development, the fact is without a reliable water source to supply the new center, these enhanced programs will simply remain dreams.  A reliable water well is a critical part of the new Youth Empowerment Center. Last year, the camp’s only borehole pump failed -- a life-threatening problem in a country where the temperatures can exceed 100 degrees Fahrenheit during the dry season. The NGO responsible for its installation was unable to effect repairs due to the COVID-19 pandemic. Residents became increasingly desperate for this single source of fresh water to be restored. Because ChildVoice continued to maintain a presence in the camp during the pandemic, it handled the repairs.   But as ChildVoice began planning the construction of a new training center, a stark reality quickly became clear: the camp’s single hand-pump well simply can’t produce enough water to meet the needs of their expanded agriculture program and other vocational programs that require water.  The agriculture program is especially important given ongoing hunger issues in the camp and beyond. One of the most important features of the program that requires a reliable water source will be drip irrigation, which will allow ChildVoice to teach dry season farming. Demonstration plots will also rely heavily on water. Because water is essential for these agriculture programs to be successful, it’s no understatement that for ChildVoice's students living in the IDP camp, water is life. "),
         Problem(idProblem =3,
-                descriptionProblem="A problem from the project Nr.3")
+                descriptionProblem="What is the challenge? According to FAO, in the Global Report on Food Crisis 2017, the worsening economic situation in Venezuela has caused a severe shortage of food and medicine. Many refer to this as the ‘Maduro diet.’ Medical supplies are not being imported to Venezuela. This serious crisis is causing malnutrition, which is far from being alleviated. Hospitals in Venezuela are not providing enough meals for all their patients. Some are only providing rice as their main meal. Most of the patients get thinner day-by-day. It seems that they get sicker during their stay at the hospital due to the lack of protein. A well-balanced meal and proper medication are required for a successful recovery. This, far too often, is not happening.")
     
     ]
 
@@ -308,114 +309,178 @@ def add_sample_data(db_session):
 
     projects: List[Project] = [
         Project(idProject=1,
-                nameProject= "Test Project Nr.1",
-                statusProject= "in progress",
-                shortDescription = "Its short",
-                amountProject=500,
+                nameProject= "Meals and Medicine for Venezuelan Hospitals",
+                statusProject= "In Progress",
+                shortDescription = "Providing new mothers and vulnerable patients in Venezuela with the nutrition, services, and medicine they deserve.",
+                amountProject=random.randint(0, 2000),
+                shouldAmountProject= 1000,
+                paymentInformationProject="0xd6F1e5fa1ac59F54F347D84198006Cc923f3750E",
+                pageProject= "www.Project1.com"
+                ),
+
+        Project(idProject=2,
+                nameProject= "Emergency Hunger Relief in South Africa",
+                statusProject= "finished",
+                shortDescription = "Ensuring vulnerable families in rural South Africa keep food on the table during the COVID19 crisis..",
+                amountProject=random.randint(0, 2000),
+                shouldAmountProject= 800,
+                paymentInformationProject="0xd6F1e5fa1ac59F54F347D84198006Cc923f3750E",
+                pageProject= "www.Project2.com"
+                ),
+
+        Project(idProject=3,
+                nameProject= "Fresh Water for Children Displaced by Boko Haram in Nigeria",
+                statusProject= "In Progress",
+                shortDescription = "Provide water for up to 200 ChildVoice students living in Nigeria’s Malkohi Internally Displaced Persons (IDP) camp",
+                amountProject=random.randint(0, 2000),
+                shouldAmountProject= 3000,
+                paymentInformationProject="0xd6F1e5fa1ac59F54F347D84198006Cc923f3750E",
+                pageProject= "www.Project3.com"
+                ),
+        Project(idProject=4,
+                nameProject= "Meals and Medicine for Venezuelan Hospitals",
+                statusProject= "In Progress",
+                shortDescription = "Providing new mothers and vulnerable patients in Venezuela with the nutrition, services, and medicine they deserve.",
+                amountProject=random.randint(0, 2000),
+                shouldAmountProject= 1000,
+                paymentInformationProject="some Payment informations ",
+                pageProject= "www.Project1.com"
+                ),
+
+        Project(idProject=5,
+                nameProject= "Emergency Hunger Relief in South Africa",
+                statusProject= "finished",
+                shortDescription = "Ensuring vulnerable families in rural South Africa keep food on the table during the COVID19 crisis..",
+                amountProject=random.randint(0, 2000),
+                shouldAmountProject= 5000,
+                paymentInformationProject="some Payment informations ",
+                pageProject= "www.Project2.com"
+                ),
+
+        Project(idProject=6,
+                nameProject= "Fresh Water for Children Displaced by Boko Haram in Nigeria",
+                statusProject= "In Progress",
+                shortDescription = "Provide water for up to 200 ChildVoice students living in Nigeria’s Malkohi Internally Displaced Persons (IDP) camp",
+                amountProject=random.randint(0, 2000),
+                shouldAmountProject= 5432,
+                paymentInformationProject="some Payment informations ",
+                pageProject= "www.Project3.com"
+                ),
+        Project(idProject=7,
+                nameProject= "Meals and Medicine for Venezuelan Hospitals",
+                statusProject= "In Progress",
+                shortDescription = "Providing new mothers and vulnerable patients in Venezuela with the nutrition, services, and medicine they deserve.",
+                amountProject=random.randint(0, 2000),
                 shouldAmountProject= 10000,
                 paymentInformationProject="some Payment informations ",
                 pageProject= "www.Project1.com"
                 ),
 
-        Project(idProject=2,
-                nameProject= "Test Project Nr.2",
+        Project(idProject=8,
+                nameProject= "Emergency Hunger Relief in South Africa",
                 statusProject= "finished",
-                shortDescription = "Its extremly short",
-                amountProject=5000,
+                shortDescription = "Ensuring vulnerable families in rural South Africa keep food on the table during the COVID19 crisis..",
+                amountProject=random.randint(0, 2000),
+                shouldAmountProject= 1234,
+                paymentInformationProject="some Payment informations ",
+                pageProject= "www.Project2.com"
+                ),
+
+        Project(idProject=9,
+                nameProject= "Fresh Water for Children Displaced by Boko Haram in Nigeria",
+                statusProject= "In Progress",
+                shortDescription = "Provide water for up to 200 ChildVoice students living in Nigeria’s Malkohi Internally Displaced Persons (IDP) camp",
+                amountProject=random.randint(0, 2000),
+                shouldAmountProject= 3210,
+                paymentInformationProject="some Payment informations ",
+                pageProject= "www.Project3.com"
+                ),
+        Project(idProject=10,
+                nameProject= "Meals and Medicine for Venezuelan Hospitals",
+                statusProject= "In Progress",
+                shortDescription = "Providing new mothers and vulnerable patients in Venezuela with the nutrition, services, and medicine they deserve.",
+                amountProject=random.randint(0, 2000),
+                shouldAmountProject= 1560,
+                paymentInformationProject="some Payment informations ",
+                pageProject= "www.Project1.com"
+                ),
+
+        Project(idProject=11,
+                nameProject= "Emergency Hunger Relief in South Africa",
+                statusProject= "finished",
+                shortDescription = "Ensuring vulnerable families in rural South Africa keep food on the table during the COVID19 crisis..",
+                amountProject=random.randint(0, 2000),
                 shouldAmountProject= 5000,
                 paymentInformationProject="some Payment informations ",
                 pageProject= "www.Project2.com"
                 ),
 
-        Project(idProject=3,
-                nameProject= "Test Project Nr.3",
-                statusProject= "almost finished",
-                shortDescription = "The shortest you ve ever seen",
-                amountProject=2500,
+        Project(idProject=12,
+                nameProject= "Fresh Water for Children Displaced by Boko Haram in Nigeria",
+                statusProject= "In Progress",
+                shortDescription = "Provide water for up to 200 ChildVoice students living in Nigeria’s Malkohi Internally Displaced Persons (IDP) camp",
+                amountProject=random.randint(0, 2000),
+                shouldAmountProject= 12000,
+                paymentInformationProject="some Payment informations ",
+                pageProject= "www.Project3.com"
+                ),
+        Project(idProject=13,
+                nameProject= "Meals and Medicine for Venezuelan Hospitals",
+                statusProject= "In Progress",
+                shortDescription = "Providing new mothers and vulnerable patients in Venezuela with the nutrition, services, and medicine they deserve.",
+                amountProject=random.randint(0, 2000),
+                shouldAmountProject= 10000,
+                paymentInformationProject="some Payment informations ",
+                pageProject= "www.Project1.com"
+                ),
+
+        Project(idProject=14,
+                nameProject= "Emergency Hunger Relief in South Africa",
+                statusProject= "finished",
+                shortDescription = "Ensuring vulnerable families in rural South Africa keep food on the table during the COVID19 crisis..",
+                amountProject=random.randint(0, 2000),
+                shouldAmountProject= 500,
+                paymentInformationProject="some Payment informations ",
+                pageProject= "www.Project2.com"
+                ),
+
+        Project(idProject=15,
+                nameProject= "Fresh Water for Children Displaced by Boko Haram in Nigeria",
+                statusProject= "In Progress",
+                shortDescription = "Provide water for up to 200 ChildVoice students living in Nigeria’s Malkohi Internally Displaced Persons (IDP) camp",
+                amountProject=random.randint(0, 2000),
                 shouldAmountProject= 3000,
                 paymentInformationProject="some Payment informations ",
                 pageProject= "www.Project3.com"
                 ),
-        Project(idProject=4,
-                nameProject= "Test Project Nr.4",
+        Project(idProject=16,
+                nameProject= "Meals and Medicine for Venezuelan Hospitals",
+                statusProject= "In Progress",
+                shortDescription = "Providing new mothers and vulnerable patients in Venezuela with the nutrition, services, and medicine they deserve.",
+                amountProject=random.randint(0, 2000),
+                shouldAmountProject= 10000,
+                paymentInformationProject="some Payment informations ",
+                pageProject= "www.Project1.com"
+                ),
+
+        Project(idProject=17,
+                nameProject= "Emergency Hunger Relief in South Africa",
                 statusProject= "finished",
-                shortDescription = "Its extremly short",
-                amountProject=5000,
-                shouldAmountProject= 5000,
+                shortDescription = "Ensuring vulnerable families in rural South Africa keep food on the table during the COVID19 crisis..",
+                amountProject=random.randint(0, 2000),
+                shouldAmountProject= 2500,
                 paymentInformationProject="some Payment informations ",
                 pageProject= "www.Project2.com"
                 ),
-        Project(idProject=5,
-                nameProject= "Test Project Nr.5",
-                statusProject= "finished",
-                shortDescription = "Its extremly short",
-                amountProject=5000,
-                shouldAmountProject= 5000,
+
+        Project(idProject=18,
+                nameProject= "Fresh Water for Children Displaced by Boko Haram in Nigeria",
+                statusProject= "In Progress",
+                shortDescription = "Provide water for up to 200 ChildVoice students living in Nigeria’s Malkohi Internally Displaced Persons (IDP) camp",
+                amountProject=random.randint(0, 2000),
+                shouldAmountProject= 3300,
                 paymentInformationProject="some Payment informations ",
-                pageProject= "www.Project2.com"
-                ),
-        Project(idProject=6,
-                nameProject= "Test Project Nr.6",
-                statusProject= "finished",
-                shortDescription = "Its extremly short",
-                amountProject=5000,
-                shouldAmountProject= 5000,
-                paymentInformationProject="some Payment informations ",
-                pageProject= "www.Project2.com"
-                ),
-        Project(idProject=7,
-                nameProject= "Test Project Nr.7",
-                statusProject= "finished",
-                shortDescription = "Its extremly short",
-                amountProject=5000,
-                shouldAmountProject= 5000,
-                paymentInformationProject="some Payment informations ",
-                pageProject= "www.Project2.com"
-                ),
-        Project(idProject=8,
-                nameProject= "Test Project Nr.8",
-                statusProject= "finished",
-                shortDescription = "Its extremly short",
-                amountProject=5000,
-                shouldAmountProject= 5000,
-                paymentInformationProject="some Payment informations ",
-                pageProject= "www.Project2.com"
-                ),
-        Project(idProject=9,
-                nameProject= "Test Project Nr.9",
-                statusProject= "finished",
-                shortDescription = "Its extremly short",
-                amountProject=5000,
-                shouldAmountProject= 5000,
-                paymentInformationProject="some Payment informations ",
-                pageProject= "www.Project2.com"
-                ),
-        Project(idProject=10,
-                nameProject= "Test Project Nr.10",
-                statusProject= "finished",
-                shortDescription = "Its extremly short",
-                amountProject=5000,
-                shouldAmountProject= 5000,
-                paymentInformationProject="some Payment informations ",
-                pageProject= "www.Project2.com"
-                ),
-        Project(idProject=11,
-                nameProject= "Test Project Nr.11",
-                statusProject= "finished",
-                shortDescription = "Its extremly short",
-                amountProject=5000,
-                shouldAmountProject= 5000,
-                paymentInformationProject="some Payment informations ",
-                pageProject= "www.Project2.com"
-                ),
-        Project(idProject=12,
-                nameProject= "Test Project Nr.12",
-                statusProject= "finished",
-                shortDescription = "Its extremly short",
-                amountProject=5000,
-                shouldAmountProject= 5000,
-                paymentInformationProject="some Payment informations ",
-                pageProject= "www.Project2.com"
+                pageProject= "www.Project3.com"
                 )
     ]
 
@@ -456,6 +521,23 @@ def add_sample_data(db_session):
     projects[11].idImage = images[1].idImage
     projects[11].idNGO =ngos[2].idNGO
 
+    projects[12].idImage = images[3].idImage
+    projects[12].idNGO =ngos[2].idNGO
+
+    projects[13].idImage = images[4].idImage
+    projects[13].idNGO =ngos[2].idNGO
+
+    projects[14].idImage = images[2].idImage
+    projects[14].idNGO =ngos[2].idNGO
+
+    projects[15].idImage = images[4].idImage
+    projects[15].idNGO =ngos[2].idNGO
+
+    projects[16].idImage = images[1].idImage
+    projects[16].idNGO =ngos[2].idNGO
+
+    projects[17].idImage = images[3].idImage
+    projects[17].idNGO =ngos[2].idNGO
 
     
 

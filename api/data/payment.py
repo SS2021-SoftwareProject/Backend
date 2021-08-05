@@ -103,7 +103,7 @@ def zahlung_post(session):
                          datePayment=date,
                          idProject = project,
                          idUser = user)
-    except (KeyError, ValueError, DecodeError):  # jwt decode errors
+    except (KeyError, ValueError, DecodeError, Exception):  # jwt decode errors
         return jsonify({'status': 'Invalid JWT'}), 400
 
     session.add(zahlung_inst)
