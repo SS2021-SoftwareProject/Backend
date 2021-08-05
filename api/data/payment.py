@@ -1,6 +1,7 @@
 """User Resource."""
 import re
 import validators
+import requests
 from flask import Blueprint, request, jsonify
 from sqlalchemy import func
 from .annotations import db_session_dec
@@ -78,6 +79,18 @@ def zahlung_post(session):
     # ----------------------------------------------------------------------------------------------------
     # Append to Blockchain
     # ----------------------------------------------------------------------------------------------------
+
+    # DONT CHANGE!------------------------------------------------
+    url = 'http://127.0.0.1:6000/new_block'
+    data= {'transaction': project,
+            'amount' : amount,
+            'customerID': user}
+
+
+    requests.post(url, data = data)
+    # DONT CHANGE!------------------------------------------------
+
+
 
     if None in [user, project, amount]:
         return jsonify({'error': 'Missing parameter'}), 400
